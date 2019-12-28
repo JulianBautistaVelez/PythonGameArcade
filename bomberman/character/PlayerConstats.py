@@ -1,0 +1,7 @@
+
+class PlayerConstants:
+    MOVEMENT_SPEED = 1
+    UPDATES_PER_FRAME = 7
+    CHARACTER_SCALING = 0.25
+    RIGHT_FACING = 0
+    LEFT_FACING = 1

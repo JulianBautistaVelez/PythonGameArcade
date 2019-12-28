@@ -1,22 +1,73 @@
 import arcade
-import Character
+from character.PlayerCharacter import PlayerCharacter
+from character.PlayerConstats import PlayerConstants as pC
+from map.Map import Map
+import os
 
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
+
+SCREEN_WIDTH = 992
+SCREEN_HEIGHT = 672
 SCREEN_TITLE = "Prueba juego"
 
 
 class MyGame(arcade.Window):
     def __init__(self, width, height, title):
         super().__init__(width, height, title)
+        file_path = os.path.dirname(os.path.abspath(__file__))
+        os.chdir(file_path)
         arcade.set_background_color(arcade.color.AIR_SUPERIORITY_BLUE)
+        self.physics_engine = None
+        self.player_list = None
+        self.wall_list = None
+        self.player = None
+
+    def setup(self):
+        self.player_list = arcade.SpriteList()
+        self.wall_list = Map(SCREEN_WIDTH, SCREEN_HEIGHT).get_sprite_list()
+        self.player = PlayerCharacter()
+
+        self.player.center_x = (SCREEN_WIDTH // 2) + 10
+        self.player.center_y = SCREEN_HEIGHT // 2
+        self.player.scale = 0.8
+
+        self.player_list.append(self.player)
+
+        self.physics_engine = arcade.PhysicsEngineSimple(self.player_list[0], self.wall_list)
 
     def on_draw(self):
         arcade.start_render()
 
+        self.player_list.draw()
+        self.wall_list.draw()
+        output = f"Hola"
+        arcade.draw_text(output, 10, 20, arcade.color.ATOMIC_TANGERINE, 24)
+
+    def on_key_press(self, key, modifiers):
+        if key == arcade.key.UP:
+            self.player.change_y = pC.MOVEMENT_SPEED
+        elif key == arcade.key.DOWN:
+            self.player.change_y = -pC.MOVEMENT_SPEED
+        elif key == arcade.key.LEFT:
+            self.player.change_x = -pC.MOVEMENT_SPEED
+        elif key == arcade.key.RIGHT:
+            self.player.change_x = pC.MOVEMENT_SPEED
+
+    def on_key_release(self, key, modifiers):
+        if key == arcade.key.UP or key == arcade.key.DOWN:
+            self.player.change_y = 0
+        elif key == arcade.key.LEFT or key == arcade.key.RIGHT:
+            self.player.change_x = 0
+
+    def on_update(self, delta_time: float):
+        self.player_list.update()
+        self.player_list.update_animation()
+        # Try to solve the problem with diagonal collisions
+        self.physics_engine.update()
+
 
 def main():
-    game = MyGame(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_TITLE)
+    game = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+    game.setup()
     arcade.run()
 
 
