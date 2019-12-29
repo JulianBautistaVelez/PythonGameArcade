@@ -59,7 +59,7 @@ class MyGame(arcade.Window):
             self.player.change_x = 0
 
     def on_update(self, delta_time: float):
-        self.player_list.update()
+        # self.player_list.update()
         self.player_list.update_animation()
         # Try to solve the problem with diagonal collisions
         self.physics_engine.update()
