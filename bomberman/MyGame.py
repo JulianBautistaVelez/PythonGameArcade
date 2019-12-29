@@ -1,6 +1,7 @@
 import arcade
 from character.PlayerCharacter import PlayerCharacter
 from character.PlayerConstats import PlayerConstants as pC
+from objects.explosives.Explosives import Explosives
 from map.Map import Map
 import os
 
@@ -19,10 +20,12 @@ class MyGame(arcade.Window):
         self.physics_engine = None
         self.player_list = None
         self.wall_list = None
+        self.explosions_list = None
         self.player = None
 
     def setup(self):
         self.player_list = arcade.SpriteList()
+        self.explosions_list = arcade.SpriteList()
         self.wall_list = Map(SCREEN_WIDTH, SCREEN_HEIGHT).get_sprite_list()
         self.player = PlayerCharacter()
 
@@ -38,6 +41,7 @@ class MyGame(arcade.Window):
         arcade.start_render()
 
         self.player_list.draw()
+        self.explosions_list.draw()
         self.wall_list.draw()
         output = f"Hola"
         arcade.draw_text(output, 10, 20, arcade.color.ATOMIC_TANGERINE, 24)
@@ -57,10 +61,15 @@ class MyGame(arcade.Window):
             self.player.change_y = 0
         elif key == arcade.key.LEFT or key == arcade.key.RIGHT:
             self.player.change_x = 0
+        elif key == arcade.key.SPACE:
+            explosion = Explosives(self.player.center_x, self.player.center_y)
+            self.explosions_list.append(explosion)
+
 
     def on_update(self, delta_time: float):
         # self.player_list.update()
         self.player_list.update_animation()
+        self.explosions_list.update()
         # Try to solve the problem with diagonal collisions
         self.physics_engine.update()
 
