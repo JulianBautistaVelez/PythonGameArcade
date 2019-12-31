@@ -2,7 +2,9 @@ import arcade
 from character.PlayerCharacter import PlayerCharacter
 from character.PlayerConstats import PlayerConstants as pC
 from objects.explosives.Explosives import Explosives
+from utils.Position import Position
 from map.Map import Map
+from utils.Position import Position
 import os
 
 
@@ -43,8 +45,6 @@ class MyGame(arcade.Window):
         self.player_list.draw()
         self.explosions_list.draw()
         self.wall_list.draw()
-        output = f"Hola"
-        arcade.draw_text(output, 10, 20, arcade.color.ATOMIC_TANGERINE, 24)
 
     def on_key_press(self, key, modifiers):
         if key == arcade.key.UP:
