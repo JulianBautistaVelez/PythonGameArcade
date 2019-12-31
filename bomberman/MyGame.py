@@ -65,7 +65,6 @@ class MyGame(arcade.Window):
             explosion = Explosives(self.player.center_x, self.player.center_y)
             self.explosions_list.append(explosion)
 
-
     def on_update(self, delta_time: float):
         # self.player_list.update()
         self.player_list.update_animation()
