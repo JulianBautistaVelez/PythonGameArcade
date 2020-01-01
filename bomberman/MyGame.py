@@ -19,6 +19,7 @@ class MyGame(arcade.Window):
         self.wall_list = None
         self.explosions_list = None
         self.player = None
+        self.player_position = None
         self.map = None
 
     def setup(self):
@@ -27,21 +28,22 @@ class MyGame(arcade.Window):
         self.explosions_list = arcade.SpriteList()
         self.wall_list = self.map.get_sprite_list()
         self.player = PlayerCharacter()
-
-        self.player.center_x = (const.GAME_SCREEN_WIDTH // 2) + 10
-        self.player.center_y = const.GAME_SCREEN_HEIGHT // 2
+        self.player_position = Position(29, 19)
+        position = self.map.get_center_of_position(self.player_position)
+        # self.player.center_x = (const.GAME_SCREEN_WIDTH // 2)
+        self.player.center_x = position[0]
+        self.player.center_y = position[1]
 
         self.player_list.append(self.player)
 
-        self.physics_engine = arcade.PhysicsEngineSimple(self.player_list[0], self.wall_list)
+        self.physics_engine = arcade.PhysicsEngineSimple(self.player, self.wall_list)
         # NO FUNCIONA; HACER TESTS
-        # destiny = Position(18,28)
-        # PathFinder.find_path_only_two_directions(
-        #     self.map.grid,
-        #     self.player.get_position_in_grid(self.map.size_x, self.map.size_y),
-        #     destiny
-        # )
-        # self.player.go_to(destiny)
+        destiny = Position(5,5)
+        self.player.steps = PathFinder.find_path_only_two_directions(
+            self.map.grid,
+            self.player.get_position_in_grid(self.map.size_x, self.map.size_y),
+            destiny
+        )
 
     def on_draw(self):
         arcade.start_render()
@@ -70,13 +72,14 @@ class MyGame(arcade.Window):
             self.explosions_list.append(explosion)
 
     def on_update(self, delta_time: float):
+        # self.player.go_to_destiny()
         # self.player_list.update()
         self.player_list.update_animation()
         self.explosions_list.update()
         # Try to solve the problem with diagonal collisions
         self.physics_engine.update()
         # print("EL CHARACTER ESTA EN LA POSICION: ")
-        # print(self.map.get_position_in_grid(self.player.get_position()))
+        # print(self.player.get_center())
 
 
 def main():

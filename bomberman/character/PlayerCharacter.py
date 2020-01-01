@@ -36,8 +36,12 @@ class PlayerCharacter(arcade.Sprite):
 
         self.current_texture = 0
 
+        # steps to reach destiny
+        self.steps = None
+        self.actual_step = None
+
         # state of the character
-        self.reached_go_to = False
+        self.reached_go_to = True
 
         # collision box
         # self.points = [[-11, -32], [11, -32], [11, 14], [-11, 14]]
@@ -80,25 +84,42 @@ class PlayerCharacter(arcade.Sprite):
             int(self.center_y // (const.GAME_SCREEN_HEIGHT / size_y))
         )
 
+    def get_center(self):
+        return [self.center_x, self.center_y]
+
     def go_to(self, position: Position):
-        self.reached_go_to = False
-        if not self.reached_go_to:
-            while self.center_x != position.center_in_pix_x:
-                if self.center_x < position.center_in_pix_x:
-                    self.change_x += const.CHARACTER_MOVEMENT_SPEED
-                else:
-                    self.change_x -= const.CHARACTER_MOVEMENT_SPEED
+        # print("ESTOY EN:")
+        # print(self.get_position_in_grid(31,21))
+        # print("QUIERO IR A:")
+        # print(position)
+        # print("HE LLEGADO?:")
+        # print(self.reached_go_to)
 
-            while self.center_y != position.center_in_pix_y:
-                if self.center_y < position.center_in_pix_y:
-                    self.change_y += const.CHARACTER_MOVEMENT_SPEED
-                else:
-                    self.change_y -= const.CHARACTER_MOVEMENT_SPEED
+        # if self.center_x == position.center_in_pix_x and self.center_y == position.center_in_pix_y:
+        if not self.center_x == position.center_in_pix_x and not self.center_y == position.center_in_pix_y:
+            self.reached_go_to = False
+            if self.center_x < position.center_in_pix_x:
+                self.change_x = const.CHARACTER_MOVEMENT_SPEED
+                self.change_y = 0
+            else:
+                self.change_x = -const.CHARACTER_MOVEMENT_SPEED
+                self.change_y = 0
 
+            if self.center_y < position.center_in_pix_y:
+                self.change_y = const.CHARACTER_MOVEMENT_SPEED
+                self.change_x = 0
+            else:
+                self.change_y = -const.CHARACTER_MOVEMENT_SPEED
+                self.change_x = 0
+        else:
+            self.change_x = 0
+            self.change_y = 0
             self.reached_go_to = True
 
-
-
+    def go_to_destiny(self):
+        if self.reached_go_to:
+            self.actual_step = self.steps.pop(0)
+        self.go_to(self.actual_step)
 
 
 
