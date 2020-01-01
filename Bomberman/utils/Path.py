@@ -8,13 +8,15 @@ class PathFinder:
         steps = []
         current_pos = starting_pos
         path = grid
-        print("TAMAÑO DEL GRID RECIBIDO POR PATHFINDER:")
-        print(len(grid))
-        print(len(grid[0]))
-        print('\n'.join([''.join(['{:4}'.format(item) for item in row])
-                         for row in grid]))
+        # print("TAMAÑO DEL GRID RECIBIDO POR PATHFINDER:")
+        # print(len(grid))
+        # print(len(grid[0]))
+        # print('\n'.join([''.join(['{:4}'.format(item) for item in row])
+        #                  for row in grid]))
         possible_steps = []
         distances = []
+        # Append the actual position as first step
+        steps.append(starting_pos)
         while current_pos != end_pos:
             if path[current_pos.pos_x + 1][current_pos.pos_y] == 0:
                 possible_steps.append(Position(current_pos.pos_x + 1, current_pos.pos_y))
@@ -35,17 +37,20 @@ class PathFinder:
                     break
 
             else:
-                steps.append(possible_steps[distances.index(min(distances))])
+                step_selected = possible_steps[distances.index(min(distances))]
+                steps.append(step_selected)
+                grid[current_pos.pos_x][current_pos.pos_y] = 2
+                current_pos = step_selected
                 # print("SIGUIENTE PASO")
                 # print(possible_steps[distances.index(min(distances))])
-                grid[current_pos.pos_x][current_pos.pos_y] = 2
-                current_pos = possible_steps[distances.index(min(distances))]
+                # print("ME FALTA:")
+                # print(min(distances))
                 possible_steps.clear()
                 distances.clear()
 
         # print("MAPA SOLUCIONADO:")
         # print('\n'.join([''.join(['{:4}'.format(item) for item in row])
         #                  for row in grid]))
-        for i in range(len(steps)):
-            print(steps[i])
+        # for i in range(len(steps)):
+        #     print(steps[i])
         return steps

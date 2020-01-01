@@ -38,12 +38,13 @@ class MyGame(arcade.Window):
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player, self.wall_list)
         # NO FUNCIONA; HACER TESTS
-        destiny = Position(5,5)
-        self.player.steps = PathFinder.find_path_only_two_directions(
+        destiny = Position(4,4)
+        path = PathFinder.find_path_only_two_directions(
             self.map.grid,
             self.player.get_position_in_grid(self.map.size_x, self.map.size_y),
             destiny
         )
+        self.player.set_path(path)
 
     def on_draw(self):
         arcade.start_render()
@@ -72,7 +73,10 @@ class MyGame(arcade.Window):
             self.explosions_list.append(explosion)
 
     def on_update(self, delta_time: float):
-        # self.player.go_to_destiny()
+        self.player.go_to_destiny()
+        # print("ESTOY EN:")
+        # print(self.get_position_in_grid(31,21))
+        # print("X: " + str(self.player.center_x) + " Y:" + str(self.player.center_y))
         # self.player_list.update()
         self.player_list.update_animation()
         self.explosions_list.update()

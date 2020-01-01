@@ -42,6 +42,7 @@ class PlayerCharacter(arcade.Sprite):
 
         # state of the character
         self.reached_go_to = True
+        self.moving = False
 
         # collision box
         # self.points = [[-11, -32], [11, -32], [11, 14], [-11, 14]]
@@ -87,39 +88,54 @@ class PlayerCharacter(arcade.Sprite):
     def get_center(self):
         return [self.center_x, self.center_y]
 
+    def set_path(self, steps):
+        self.steps = steps
+        self.actual_step = self.steps.pop(0)
+
     def go_to(self, position: Position):
         # print("ESTOY EN:")
-        # print(self.get_position_in_grid(31,21))
-        # print("QUIERO IR A:")
-        # print(position)
+        # # print(self.get_position_in_grid(31,21))
+        # print("X: " + str(self.center_x) + " Y:" + str(self.center_y))
+        print("QUIERO IR A:")
+        print(position)
         # print("HE LLEGADO?:")
         # print(self.reached_go_to)
 
         # if self.center_x == position.center_in_pix_x and self.center_y == position.center_in_pix_y:
-        if not self.center_x == position.center_in_pix_x and not self.center_y == position.center_in_pix_y:
-            self.reached_go_to = False
-            if self.center_x < position.center_in_pix_x:
-                self.change_x = const.CHARACTER_MOVEMENT_SPEED
-                self.change_y = 0
-            else:
-                self.change_x = -const.CHARACTER_MOVEMENT_SPEED
-                self.change_y = 0
-
-            if self.center_y < position.center_in_pix_y:
-                self.change_y = const.CHARACTER_MOVEMENT_SPEED
-                self.change_x = 0
-            else:
-                self.change_y = -const.CHARACTER_MOVEMENT_SPEED
-                self.change_x = 0
-        else:
-            self.change_x = 0
+        # if self.center_x != position.center_in_pix_x or self.center_y != position.center_in_pix_y:
+        self.reached_go_to = False
+        if self.center_x < position.center_in_pix_x:
+            self.change_x = const.CHARACTER_MOVEMENT_SPEED
             self.change_y = 0
-            self.reached_go_to = True
+        elif self.center_x > position.center_in_pix_x:
+            self.change_x = -const.CHARACTER_MOVEMENT_SPEED
+            self.change_y = 0
+        elif self.center_y < position.center_in_pix_y:
+            self.change_y = const.CHARACTER_MOVEMENT_SPEED
+            self.change_x = 0
+        elif self.center_y > position.center_in_pix_y:
+            self.change_y = -const.CHARACTER_MOVEMENT_SPEED
+            self.change_x = 0
+        # else:
+        #     print("HE LLEGADO!!")
+        #     self.change_x = 0
+        #     self.change_y = 0
+        #     self.reached_go_to = True
+        #     self.moving = False
 
     def go_to_destiny(self):
-        if self.reached_go_to:
-            self.actual_step = self.steps.pop(0)
-        self.go_to(self.actual_step)
+        if self.center_x != self.steps[len(self.steps) - 1].center_in_pix_x or \
+                self.center_y != self.steps[len(self.steps) - 1].center_in_pix_y:
+            print("comparacion X: " + str(self.center_x) + ", " + str(self.actual_step.center_in_pix_x))
+            print("comparacion Y: " + str(self.center_y) + ", " + str(self.actual_step.center_in_pix_y))
+            if self.center_x == self.actual_step.center_in_pix_x and self.center_y == self.actual_step.center_in_pix_y:
+                print("SEGUNDA COMPROBACION PASADA")
+
+                self.change_x = 0
+                self.change_y = 0
+                self.reached_go_to = True
+                self.actual_step = self.steps.pop(0)
+                self.go_to(self.actual_step)
 
 
 
