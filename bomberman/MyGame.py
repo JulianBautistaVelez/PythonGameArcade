@@ -1,16 +1,11 @@
 import arcade
+from GameConstants import GameConstants as const
 from character.PlayerCharacter import PlayerCharacter
-from character.PlayerConstats import PlayerConstants as pC
 from objects.explosives.Explosives import Explosives
 from utils.Position import Position
+from utils.Path import PathFinder
 from map.Map import Map
-from utils.Position import Position
 import os
-
-
-SCREEN_WIDTH = 992
-SCREEN_HEIGHT = 672
-SCREEN_TITLE = "Prueba juego"
 
 
 class MyGame(arcade.Window):
@@ -24,20 +19,29 @@ class MyGame(arcade.Window):
         self.wall_list = None
         self.explosions_list = None
         self.player = None
+        self.map = None
 
     def setup(self):
+        self.map = Map(const.GAME_SCREEN_WIDTH, const.GAME_SCREEN_HEIGHT)
         self.player_list = arcade.SpriteList()
         self.explosions_list = arcade.SpriteList()
-        self.wall_list = Map(SCREEN_WIDTH, SCREEN_HEIGHT).get_sprite_list()
+        self.wall_list = self.map.get_sprite_list()
         self.player = PlayerCharacter()
 
-        self.player.center_x = (SCREEN_WIDTH // 2) + 10
-        self.player.center_y = SCREEN_HEIGHT // 2
-        self.player.scale = 0.8
+        self.player.center_x = (const.GAME_SCREEN_WIDTH // 2) + 10
+        self.player.center_y = const.GAME_SCREEN_HEIGHT // 2
 
         self.player_list.append(self.player)
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_list[0], self.wall_list)
+        # NO FUNCIONA; HACER TESTS
+        # destiny = Position(18,28)
+        # PathFinder.find_path_only_two_directions(
+        #     self.map.grid,
+        #     self.player.get_position_in_grid(self.map.size_x, self.map.size_y),
+        #     destiny
+        # )
+        # self.player.go_to(destiny)
 
     def on_draw(self):
         arcade.start_render()
@@ -48,13 +52,13 @@ class MyGame(arcade.Window):
 
     def on_key_press(self, key, modifiers):
         if key == arcade.key.UP:
-            self.player.change_y = pC.MOVEMENT_SPEED
+            self.player.change_y = const.CHARACTER_MOVEMENT_SPEED
         elif key == arcade.key.DOWN:
-            self.player.change_y = -pC.MOVEMENT_SPEED
+            self.player.change_y = -const.CHARACTER_MOVEMENT_SPEED
         elif key == arcade.key.LEFT:
-            self.player.change_x = -pC.MOVEMENT_SPEED
+            self.player.change_x = -const.CHARACTER_MOVEMENT_SPEED
         elif key == arcade.key.RIGHT:
-            self.player.change_x = pC.MOVEMENT_SPEED
+            self.player.change_x = const.CHARACTER_MOVEMENT_SPEED
 
     def on_key_release(self, key, modifiers):
         if key == arcade.key.UP or key == arcade.key.DOWN:
@@ -71,10 +75,12 @@ class MyGame(arcade.Window):
         self.explosions_list.update()
         # Try to solve the problem with diagonal collisions
         self.physics_engine.update()
+        # print("EL CHARACTER ESTA EN LA POSICION: ")
+        # print(self.map.get_position_in_grid(self.player.get_position()))
 
 
 def main():
-    game = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+    game = MyGame(const.GAME_SCREEN_WIDTH, const.GAME_SCREEN_HEIGHT, const.GAME_SCREEN_TITLE)
     game.setup()
     arcade.run()
 

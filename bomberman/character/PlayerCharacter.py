@@ -1,24 +1,25 @@
 import arcade
-from character.PlayerConstats import PlayerConstants as pC
+from GameConstants import GameConstants as const
+from utils.Position import Position
 
 
 def load_texture_pair(filename):
     return [
-        arcade.load_texture(filename, scale=pC.CHARACTER_SCALING),
-        arcade.load_texture(filename, scale=pC.CHARACTER_SCALING),
-        arcade.load_texture(filename, scale=pC.CHARACTER_SCALING),
-        arcade.load_texture(filename, scale=pC.CHARACTER_SCALING)
+        arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING),
+        arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING),
+        arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING),
+        arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING)
     ]
 
 
 def load_walking_textures(filename):
     textures_list = []
-    for i in range(pC.UPDATES_PER_FRAME):
+    for i in range(const.CHARACTER_UPDATES_PER_FRAME):
         frame = [
-            arcade.load_texture(filename + f"_walk_{i}.png", scale=pC.CHARACTER_SCALING, mirrored=True),
-            arcade.load_texture(filename + f"_walk_{i}.png", scale=pC.CHARACTER_SCALING),
-            arcade.load_texture(filename + f"_walk_up_{i}.png", scale=pC.CHARACTER_SCALING),
-            arcade.load_texture(filename + f"_walk_down_{i}.png", scale=pC.CHARACTER_SCALING)
+            arcade.load_texture(filename + f"_walk_{i}.png", scale=const.CHARACTER_SPRITE_SCALING, mirrored=True),
+            arcade.load_texture(filename + f"_walk_{i}.png", scale=const.CHARACTER_SPRITE_SCALING),
+            arcade.load_texture(filename + f"_walk_up_{i}.png", scale=const.CHARACTER_SPRITE_SCALING),
+            arcade.load_texture(filename + f"_walk_down_{i}.png", scale=const.CHARACTER_SPRITE_SCALING)
         ]
         textures_list.append(frame)
     # print("TAMAÑO DE LA LISTA DE TEXTURAS")
@@ -31,14 +32,12 @@ class PlayerCharacter(arcade.Sprite):
     def __init__(self):
         super().__init__()
 
-        self.character_face_direction = pC.RIGHT_FACING
+        self.character_face_direction = const.CHARACTER_RIGHT_FACING
 
         self.current_texture = 0
 
         # state of the character
-        self.jumping = False
-        self.climbing = False
-        self.is_on_ladder = False
+        self.reached_go_to = False
 
         # collision box
         # self.points = [[-11, -32], [11, -32], [11, 14], [-11, 14]]
@@ -52,27 +51,53 @@ class PlayerCharacter(arcade.Sprite):
 
     def update_animation(self, delta_time: float = 1/60):
 
-        if self.change_x < 0 and self.character_face_direction != pC.LEFT_FACING:
-            self.character_face_direction = pC.LEFT_FACING
-        elif self.change_x > 0 and self.character_face_direction != pC.RIGHT_FACING:
-            self.character_face_direction = pC.RIGHT_FACING
+        if self.change_x < 0 and self.character_face_direction != const.CHARACTER_LEFT_FACING:
+            self.character_face_direction = const.CHARACTER_LEFT_FACING
+        elif self.change_x > 0 and self.character_face_direction != const.CHARACTER_RIGHT_FACING:
+            self.character_face_direction = const.CHARACTER_RIGHT_FACING
         elif self.change_y > 0:
-            self.character_face_direction = pC.UP_FACING
+            self.character_face_direction = const.CHARACTER_UP_FACING
         elif self.change_y < 0:
-            self.character_face_direction = pC.DOWN_FACING
+            self.character_face_direction = const.CHARACTER_DOWN_FACING
 
         if self.change_x == 0 and self.change_y == 0:
             self.texture = self.idle_texture_pair[self.character_face_direction]
             return
 
         self.current_texture += 1
-        if self.current_texture > 8 * pC.UPDATES_PER_FRAME:
+        if self.current_texture > 8 * const.CHARACTER_UPDATES_PER_FRAME:
             self.current_texture = 0
 
         # print("TEXTURA A UTILIZAR")
         # print("--X-- " + str(self.current_texture // pC.UPDATES_PER_FRAME))
         # print("--Y-- " + str(self.character_face_direction))
-        self.texture = self.walk_textures[self.current_texture // pC.UPDATES_PER_FRAME][self.character_face_direction]
+        self.texture = \
+            self.walk_textures[self.current_texture // const.CHARACTER_UPDATES_PER_FRAME][self.character_face_direction]
+
+    def get_position_in_grid(self, size_x: int, size_y: int):
+        return Position(
+            int(self.center_x // (const.GAME_SCREEN_WIDTH / size_x)),
+            int(self.center_y // (const.GAME_SCREEN_HEIGHT / size_y))
+        )
+
+    def go_to(self, position: Position):
+        self.reached_go_to = False
+        if not self.reached_go_to:
+            while self.center_x != position.center_in_pix_x:
+                if self.center_x < position.center_in_pix_x:
+                    self.change_x += const.CHARACTER_MOVEMENT_SPEED
+                else:
+                    self.change_x -= const.CHARACTER_MOVEMENT_SPEED
+
+            while self.center_y != position.center_in_pix_y:
+                if self.center_y < position.center_in_pix_y:
+                    self.change_y += const.CHARACTER_MOVEMENT_SPEED
+                else:
+                    self.change_y -= const.CHARACTER_MOVEMENT_SPEED
+
+            self.reached_go_to = True
+
+
 
 
 
