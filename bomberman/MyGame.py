@@ -37,7 +37,6 @@ class MyGame(arcade.Window):
         self.player_list.append(self.player)
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player, self.wall_list)
-        # NO FUNCIONA; HACER TESTS
         destiny = Position(4,4)
         path = PathFinder.find_path_only_two_directions(
             self.map.grid,

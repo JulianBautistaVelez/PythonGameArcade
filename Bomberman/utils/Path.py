@@ -8,11 +8,11 @@ class PathFinder:
         steps = []
         current_pos = starting_pos
         path = grid
-        # print("TAMAÑO DEL GRID RECIBIDO POR PATHFINDER:")
-        # print(len(grid))
-        # print(len(grid[0]))
-        # print('\n'.join([''.join(['{:4}'.format(item) for item in row])
-        #                  for row in grid]))
+        print("TAMAÑO DEL GRID RECIBIDO POR PATHFINDER:")
+        print(len(grid))
+        print(len(grid[0]))
+        print('\n'.join([''.join(['{:4}'.format(item) for item in row])
+                         for row in grid]))
         possible_steps = []
         distances = []
         # Append the actual position as first step
@@ -37,6 +37,8 @@ class PathFinder:
                     break
 
             else:
+                print("Posible steps")
+                print(len(possible_steps))
                 step_selected = possible_steps[distances.index(min(distances))]
                 steps.append(step_selected)
                 grid[current_pos.pos_x][current_pos.pos_y] = 2
@@ -48,9 +50,9 @@ class PathFinder:
                 possible_steps.clear()
                 distances.clear()
 
-        # print("MAPA SOLUCIONADO:")
-        # print('\n'.join([''.join(['{:4}'.format(item) for item in row])
-        #                  for row in grid]))
-        # for i in range(len(steps)):
-        #     print(steps[i])
+        print("MAPA SOLUCIONADO:")
+        print('\n'.join([''.join(['{:4}'.format(item) for item in row])
+                         for row in grid]))
+        for i in range(len(steps)):
+            print(steps[i])
         return steps
