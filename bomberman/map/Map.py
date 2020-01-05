@@ -9,11 +9,12 @@ def create_grid_with_cells(size_x, size_y, grid):
         for column in range(size_y):
             if column % 2 == 1 and row % 2 == 1:
                 grid[row].append(const.MAP_TILE_CRATE)
-            elif column == 0 or row == 0 or column == size_y - 1 or row == size_x - 1 or column == 6:
+            elif column == 0 or row == 0 or column == size_y - 1 or row == size_x - 1:
                 grid[row].append(const.MAP_TILE_CRATE)
             else:
                 grid[row].append(const.MAP_TILE_EMPTY)
-    grid[20][6] = const.MAP_TILE_EMPTY
+    # grid[2][6] = const.MAP_TILE_EMPTY
+    # grid[26][6] = const.MAP_TILE_EMPTY
 
 
 def texture_maze(grid, wall_list):

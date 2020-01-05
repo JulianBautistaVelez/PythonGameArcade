@@ -14,6 +14,8 @@ class MyGame(arcade.Window):
         file_path = os.path.dirname(os.path.abspath(__file__))
         os.chdir(file_path)
         arcade.set_background_color(arcade.color.AIR_SUPERIORITY_BLUE)
+        self.movements_grid = None
+        self.movements_grid_textured = None
         self.physics_engine = None
         self.player_list = None
         self.wall_list = None
@@ -26,9 +28,10 @@ class MyGame(arcade.Window):
         self.map = Map(const.GAME_SCREEN_WIDTH, const.GAME_SCREEN_HEIGHT)
         self.player_list = arcade.SpriteList()
         self.explosions_list = arcade.SpriteList()
+        self.movements_grid_textured = arcade.SpriteList()
         self.wall_list = self.map.get_sprite_list()
         self.player = PlayerCharacter()
-        self.player_position = Position(29, 19)
+        self.player_position = Position(22, 19)
         position = self.map.get_center_of_position(self.player_position)
         # self.player.center_x = (const.GAME_SCREEN_WIDTH // 2)
         self.player.center_x = position[0]
@@ -37,13 +40,13 @@ class MyGame(arcade.Window):
         self.player_list.append(self.player)
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player, self.wall_list)
-        destiny = Position(4,4)
-        path = PathFinder.find_path_only_two_directions(
+        destiny = Position(25,19)
+        self.movements_grid = PathFinder.find_path_only_two_directions(
             self.map.grid,
             self.player.get_position_in_grid(self.map.size_x, self.map.size_y),
             destiny
         )
-        self.player.set_path(path)
+        PathFinder.texture_steps(self.movements_grid, self.movements_grid_textured)
 
     def on_draw(self):
         arcade.start_render()
@@ -51,6 +54,7 @@ class MyGame(arcade.Window):
         self.player_list.draw()
         self.explosions_list.draw()
         self.wall_list.draw()
+        self.movements_grid_textured.draw()
 
     def on_key_press(self, key, modifiers):
         if key == arcade.key.UP:
@@ -72,7 +76,7 @@ class MyGame(arcade.Window):
             self.explosions_list.append(explosion)
 
     def on_update(self, delta_time: float):
-        self.player.go_to_destiny()
+        # self.player.go_to_destiny()
         # print("ESTOY EN:")
         # print(self.get_position_in_grid(31,21))
         # print("X: " + str(self.player.center_x) + " Y:" + str(self.player.center_y))
