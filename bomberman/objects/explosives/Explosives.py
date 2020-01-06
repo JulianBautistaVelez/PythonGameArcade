@@ -12,6 +12,7 @@ FILE_NAME = "././resources/images/spritesheets/explosion.png"
 TEXTURES = arcade.load_spritesheet(FILE_NAME, SPRITE_WIDTH, SPRITE_HEIGHT, COLUMNS, COUNT)
 FIRST_TEXTURE = arcade.load_texture("././resources/images/items/mine.png", scale=FIRST_SPRITE_SCALE)
 
+
 class Explosives(arcade.Sprite):
     def __init__(self, pos_x, pos_y):
         super().__init__()

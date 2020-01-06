@@ -45,7 +45,7 @@ class PlayerCharacter(arcade.Sprite):
         self.moving = False
 
         # collision box
-        self.points = [[-10, -15], [10, -15], [-10, 9], [10, 9]]
+        self.points = [[-10, -15], [10, -15], [-10, 8], [10, 8]]
 
         main_path = "./resources/images/animated_characters/barbarian/barbarian"
 
@@ -78,10 +78,10 @@ class PlayerCharacter(arcade.Sprite):
         self.texture = \
             self.walk_textures[self.current_texture // const.CHARACTER_UPDATES_PER_FRAME][self.character_face_direction]
 
-    def get_position_in_grid(self, size_x: int, size_y: int):
+    def get_position_in_grid(self):
         return Position(
-            int(self.center_x // (const.GAME_SCREEN_WIDTH / size_x)),
-            int(self.center_y // (const.GAME_SCREEN_HEIGHT / size_y))
+            int(self.center_x // const.MAP_SPRITE_SIZE),
+            int(self.center_y // const.MAP_SPRITE_SIZE)
         )
 
     def get_center(self):

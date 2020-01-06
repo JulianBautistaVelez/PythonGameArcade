@@ -6,8 +6,8 @@ class Position:
     def __init__(self, pos_x, pos_y):
         self.pos_x = pos_x
         self.pos_y = pos_y
-        self.center_in_pix_x = (const.MAP_SPRITE_SIZE * pos_x) + (const.MAP_SPRITE_SIZE / 2)
-        self.center_in_pix_y = (const.MAP_SPRITE_SIZE * pos_y) + (const.MAP_SPRITE_SIZE / 2)
+        self.center_in_pix_x = int((self.pos_x * const.MAP_SPRITE_SIZE) + const.MAP_SPRITE_SIZE // 2)
+        self.center_in_pix_y = int((self.pos_y * const.MAP_SPRITE_SIZE) + const.MAP_SPRITE_SIZE // 2)
 
     def __str__(self):
         return "X:" + str(self.pos_x) + \

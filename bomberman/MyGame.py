@@ -13,25 +13,29 @@ class MyGame(arcade.Window):
         super().__init__(width, height, title)
         file_path = os.path.dirname(os.path.abspath(__file__))
         os.chdir(file_path)
-        arcade.set_background_color(arcade.color.AIR_SUPERIORITY_BLUE)
+        arcade.set_background_color(arcade.color.BLACK)
+        self.view_left = 0
+        self.view_bottom = 0
         self.movements_grid = None
         self.movements_grid_textured = None
         self.physics_engine = None
         self.player_list = None
         self.wall_list = None
+        self.grass_list = None
         self.explosions_list = None
         self.player = None
         self.player_position = None
         self.map = None
 
     def setup(self):
-        self.map = Map(const.GAME_SCREEN_WIDTH, const.GAME_SCREEN_HEIGHT)
+        self.map = Map()
         self.player_list = arcade.SpriteList()
         self.explosions_list = arcade.SpriteList()
         self.movements_grid_textured = arcade.SpriteList()
         self.wall_list = self.map.get_sprite_list()
+        self.grass_list = self.map.get_grass_sprite_list()
         self.player = PlayerCharacter()
-        self.player_position = Position(22, 19)
+        self.player_position = Position(22, 1)
         position = self.map.get_center_of_position(self.player_position)
         # self.player.center_x = (const.GAME_SCREEN_WIDTH // 2)
         self.player.center_x = position[0]
@@ -40,21 +44,21 @@ class MyGame(arcade.Window):
         self.player_list.append(self.player)
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player, self.wall_list)
-        destiny = Position(25,19)
+        destiny = Position(28, 28)
         self.movements_grid = PathFinder.find_path_only_two_directions(
             self.map.grid,
-            self.player.get_position_in_grid(self.map.size_x, self.map.size_y),
+            self.player.get_position_in_grid(),
             destiny
         )
         PathFinder.texture_steps(self.movements_grid, self.movements_grid_textured)
 
     def on_draw(self):
         arcade.start_render()
-
+        self.wall_list.draw()
+        self.grass_list.draw()
+        self.movements_grid_textured.draw()
         self.player_list.draw()
         self.explosions_list.draw()
-        self.wall_list.draw()
-        self.movements_grid_textured.draw()
 
     def on_key_press(self, key, modifiers):
         if key == arcade.key.UP:
@@ -87,6 +91,50 @@ class MyGame(arcade.Window):
         self.physics_engine.update()
         # print("EL CHARACTER ESTA EN LA POSICION: ")
         # print(self.player.get_center())
+
+        # --- Manage Scrolling ---
+
+        # Keep track of if we changed the boundary. We don't want to call the
+        # set_viewport command if we didn't change the view port.
+        changed = False
+
+        # Scroll left
+        left_boundary = self.view_left + const.GAME_VIEWPORT_MARGIN
+        if self.player.left < left_boundary:
+            self.view_left -= left_boundary - self.player.left
+            changed = True
+
+        # Scroll right
+        right_boundary = self.view_left + const.GAME_SCREEN_WIDTH - const.GAME_VIEWPORT_MARGIN
+        if self.player.right > right_boundary:
+            self.view_left += self.player.right - right_boundary
+            changed = True
+
+        # Scroll up
+        top_boundary = self.view_bottom + const.GAME_SCREEN_HEIGHT - const.GAME_VIEWPORT_MARGIN
+        if self.player.top > top_boundary:
+            self.view_bottom += self.player.top - top_boundary
+            changed = True
+
+        # Scroll down
+        bottom_boundary = self.view_bottom + const.GAME_VIEWPORT_MARGIN
+        if self.player.bottom < bottom_boundary:
+            self.view_bottom -= bottom_boundary - self.player.bottom
+            changed = True
+
+        # Make sure our boundaries are integer values. While the view port does
+        # support floating point numbers, for this application we want every pixel
+        # in the view port to map directly onto a pixel on the screen. We don't want
+        # any rounding errors.
+        self.view_left = int(self.view_left)
+        self.view_bottom = int(self.view_bottom)
+
+        # If we changed the boundary values, update the view port to match
+        if changed:
+            arcade.set_viewport(self.view_left,
+                                const.GAME_SCREEN_WIDTH + self.view_left - 1,
+                                self.view_bottom,
+                                const.GAME_SCREEN_HEIGHT + self.view_bottom - 1)
 
 
 def main():

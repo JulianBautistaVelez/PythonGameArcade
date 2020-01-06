@@ -35,14 +35,14 @@ class PathFinder:
                 if len(steps) > 0:
                     current_pos = steps.pop()
                 else:
-                    print("NO SE HA ENCONTRADO SOLUCION")
+                    print("NO SE HA ENCONTRADO CAMINO HASTA EL DESTINO")
                     break
 
             else:
                 # print("Posible steps")
                 # print(len(possible_steps))
                 step_selected = possible_steps[distances.index(min(distances))]
-                grid[current_pos.pos_x][current_pos.pos_y] = 2
+                grid[step_selected.pos_x][step_selected.pos_y] = 2
                 steps.append(step_selected)
                 current_pos = step_selected
                 # print("SIGUIENTE PASO")
@@ -55,8 +55,8 @@ class PathFinder:
         # print("MAPA SOLUCIONADO:")
         # print('\n'.join([''.join(['{:4}'.format(item) for item in row])
         #                  for row in grid]))
-        for i in range(len(steps)):
-            print(steps[i])
+        # for i in range(len(steps)):
+        #     print(steps[i])
         return game_map
 
     @staticmethod
