@@ -6,6 +6,8 @@ class GameConstants:
     GAME_VIEWPORT_MARGIN = 100
 
     ################################## CHARACTER CONTSTANTS ################################
+    CHARACTER_PLAYER = 0
+    CHARACTER_NPC = 1
     CHARACTER_MOVEMENT_SPEED = 2
     CHARACTER_UPDATES_PER_FRAME = 9
     CHARACTER_SPRITE_SCALING = 0.5

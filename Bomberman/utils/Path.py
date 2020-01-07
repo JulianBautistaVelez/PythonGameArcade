@@ -57,7 +57,7 @@ class PathFinder:
         #                  for row in grid]))
         # for i in range(len(steps)):
         #     print(steps[i])
-        return game_map
+        return steps
 
     @staticmethod
     def texture_steps(grid, wall_list: arcade.SpriteList):

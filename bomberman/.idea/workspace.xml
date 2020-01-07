@@ -2,98 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ada21e11-98bb-46d9-8851-e4cc4d5f7cb8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/Ripped by Badassbill.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/TGH0.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/TGH1.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/TGH2.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/TGH3.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/TGH4.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/TGH5.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/TGH6.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/TGH7.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/TGH8.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/TGH9.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/TGHA.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/TGHB.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/TGHE.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/TGHF.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/TGHG.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/TGHH.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THB0.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THB1.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THB2.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THB3.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THB4.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THB5.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THB6.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THB7.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THB8.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THB9.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THBA.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THBB.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THBC.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THBD.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THBE.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THBF.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THBG.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THBH.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THBI.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THBJ.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THF0.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THF1.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THF2.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THF3.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THF4.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THF5.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THF6.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THF7.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THR0.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THR1.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THR2.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THR3.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THR4.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THR5.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THR6.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THR7.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THR8.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THR9.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THRA.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THRB.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THRC.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THRD.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THRE.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THRF.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THRG.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THRH.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THX0.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THX0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THX0_R.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THX1.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THX1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THX1_R.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THX2.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THX2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THX2_R.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THX3.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THX3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/high_grass/THX3_R.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/tiles/SNES - Wolfenstein 3D - Wall Textures.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/tiles/rock_wall.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/tiles/rock_wall0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/tiles/rock_wall1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/tiles/skull_wall0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/tiles/skull_wall1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/tiles/skull_wall2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/tiles/skull_wall3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/tiles/skull_wall3_R.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/character/Character.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameConstants.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameConstants.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/Path.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/Path.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyGame.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyGame.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/character/PlayerCharacter.py" beforeDir="false" afterPath="$PROJECT_DIR$/character/PlayerCharacter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/Map.py" beforeDir="false" afterPath="$PROJECT_DIR$/map/Map.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objects/explosives/Explosives.py" beforeDir="false" afterPath="$PROJECT_DIR$/objects/explosives/Explosives.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/Position.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/Position.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/character/PlayerCharacter.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +38,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
-  <component name="RunManager" selected="Python.MyGame (3)">
+  <component name="RunManager" selected="Python.MyGame (1)">
     <configuration name="Map (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ArcadeGame" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -138,6 +52,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/map/Map.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="MyGame (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="bomberman" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MyGame.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -201,27 +136,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MyGame.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="PlayerCharacter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ArcadeGame" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/character" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/character/PlayerCharacter.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -296,11 +210,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.MyGame (1)" />
         <item itemvalue="Python.MyGame (3)" />
         <item itemvalue="Python.Map (1)" />
         <item itemvalue="Python.MyGame" />
         <item itemvalue="Python.MyGame (2)" />
-        <item itemvalue="Python.PlayerCharacter" />
       </list>
     </recent_temporary>
   </component>
@@ -345,22 +259,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="826" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1578314105689" />
-    <state width="1515" height="209" key="GridCell.Tab.0.bottom" timestamp="1578341782406">
+    <state width="1515" height="208" key="GridCell.Tab.0.bottom" timestamp="1578428905488">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="209" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1578341782406" />
-    <state width="1515" height="209" key="GridCell.Tab.0.center" timestamp="1578341782406">
+    <state width="1515" height="208" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1578428905488" />
+    <state width="1515" height="208" key="GridCell.Tab.0.center" timestamp="1578428905488">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="209" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1578341782406" />
-    <state width="1515" height="209" key="GridCell.Tab.0.left" timestamp="1578341782406">
+    <state width="1515" height="208" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1578428905488" />
+    <state width="1515" height="208" key="GridCell.Tab.0.left" timestamp="1578428905488">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="209" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1578341782406" />
-    <state width="1515" height="209" key="GridCell.Tab.0.right" timestamp="1578341782406">
+    <state width="1515" height="208" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1578428905488" />
+    <state width="1515" height="208" key="GridCell.Tab.0.right" timestamp="1578428905488">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="209" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1578341782406" />
+    <state width="1515" height="208" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1578428905488" />
     <state width="1515" height="260" key="GridCell.Tab.1.bottom" timestamp="1577921322290">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -385,9 +299,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1577907419536" />
-    <state x="470" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1578314040447">
+    <state x="470" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1578422307360">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="470" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1578314040447" />
+    <state x="470" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1578422307360" />
   </component>
 </project>

@@ -3,41 +3,60 @@ from GameConstants import GameConstants as const
 from utils.Position import Position
 
 
-def load_texture_pair(filename):
-    return [
-        arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING),
-        arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING),
-        arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING),
-        arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING)
-    ]
+def load_texture_pair(filename, character_type: int):
+    if character_type == const.CHARACTER_PLAYER:
+        return [
+            arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING),
+            arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING),
+            arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING),
+            arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING)
+        ]
+    elif character_type == const.CHARACTER_NPC:
+        return [
+            arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING),
+            arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING),
+            arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING),
+            arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING)
+        ]
 
 
-def load_walking_textures(filename):
+def load_walking_textures(filename, character_type: int):
     textures_list = []
     for i in range(const.CHARACTER_UPDATES_PER_FRAME):
-        frame = [
-            arcade.load_texture(filename + f"_walk_{i}.png", scale=const.CHARACTER_SPRITE_SCALING, mirrored=True),
-            arcade.load_texture(filename + f"_walk_{i}.png", scale=const.CHARACTER_SPRITE_SCALING),
-            arcade.load_texture(filename + f"_walk_up_{i}.png", scale=const.CHARACTER_SPRITE_SCALING),
-            arcade.load_texture(filename + f"_walk_down_{i}.png", scale=const.CHARACTER_SPRITE_SCALING)
-        ]
-        textures_list.append(frame)
-    # print("TAMAÑO DE LA LISTA DE TEXTURAS")
-    # print("--X-- " + str(len(textures_list)))
-    # print("--Y-- " + str(len(textures_list[0])))
+        if character_type == const.CHARACTER_PLAYER:
+            frame = [
+                arcade.load_texture(filename + f"_walk_{i}.png", scale=const.CHARACTER_SPRITE_SCALING, mirrored=True),
+                arcade.load_texture(filename + f"_walk_{i}.png", scale=const.CHARACTER_SPRITE_SCALING),
+                arcade.load_texture(filename + f"_walk_up_{i}.png", scale=const.CHARACTER_SPRITE_SCALING),
+                arcade.load_texture(filename + f"_walk_down_{i}.png", scale=const.CHARACTER_SPRITE_SCALING)
+            ]
+            textures_list.append(frame)
+        elif character_type == const.CHARACTER_NPC:
+            frame = [
+                arcade.load_texture(filename + f"_walk_{i}.png", scale=const.CHARACTER_SPRITE_SCALING, mirrored=True),
+                arcade.load_texture(filename + f"_walk_{i}.png", scale=const.CHARACTER_SPRITE_SCALING),
+                arcade.load_texture(filename + f"_walk_up_{i}.png", scale=const.CHARACTER_SPRITE_SCALING),
+                arcade.load_texture(filename + f"_walk_down_{i}.png", scale=const.CHARACTER_SPRITE_SCALING)
+            ]
+            textures_list.append(frame)
     return textures_list
 
 
-class PlayerCharacter(arcade.Sprite):
-    def __init__(self):
+class Character(arcade.Sprite):
+    def __init__(self, character_type: int, position: Position):
         super().__init__()
 
         self.character_face_direction = const.CHARACTER_RIGHT_FACING
+        self.center_x = position.center_in_pix_x
+        self.center_y = position.center_in_pix_y
 
         self.current_texture = 0
 
+        # type of character (player character or npc)
+        self.character_type = character_type
+
         # steps to reach destiny
-        self.steps = None
+        self.steps = []
         self.actual_step = None
 
         # state of the character
@@ -49,9 +68,15 @@ class PlayerCharacter(arcade.Sprite):
 
         main_path = "./resources/images/animated_characters/barbarian/barbarian"
 
-        self.idle_texture_pair = load_texture_pair(f"{main_path}_idle.png")
+        self.idle_texture_pair = load_texture_pair(f"{main_path}_idle.png", self.character_type)
 
-        self.walk_textures = load_walking_textures(main_path)
+        self.walk_textures = load_walking_textures(main_path, self.character_type)
+
+        print("Texturas de NPC" if self.character_type else "Texturas de PLAYER")
+        print(len(self.idle_texture_pair))
+        print(self.idle_texture_pair)
+        print(len(self.walk_textures))
+        print(self.walk_textures)
 
     def update_animation(self, delta_time: float = 1/60):
 
@@ -72,9 +97,6 @@ class PlayerCharacter(arcade.Sprite):
         if self.current_texture > 8 * const.CHARACTER_UPDATES_PER_FRAME:
             self.current_texture = 0
 
-        # print("TEXTURA A UTILIZAR")
-        # print("--X-- " + str(self.current_texture // pC.UPDATES_PER_FRAME))
-        # print("--Y-- " + str(self.character_face_direction))
         self.texture = \
             self.walk_textures[self.current_texture // const.CHARACTER_UPDATES_PER_FRAME][self.character_face_direction]
 

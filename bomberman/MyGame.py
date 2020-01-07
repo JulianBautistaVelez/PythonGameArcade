@@ -1,6 +1,6 @@
 import arcade
 from GameConstants import GameConstants as const
-from character.PlayerCharacter import PlayerCharacter
+from character.Character import Character
 from objects.explosives.Explosives import Explosives
 from utils.Position import Position
 from utils.Path import PathFinder
@@ -13,44 +13,41 @@ class MyGame(arcade.Window):
         super().__init__(width, height, title)
         file_path = os.path.dirname(os.path.abspath(__file__))
         os.chdir(file_path)
+        # Attributes related to game window
         arcade.set_background_color(arcade.color.BLACK)
         self.view_left = 0
         self.view_bottom = 0
-        self.movements_grid = None
-        self.movements_grid_textured = None
-        self.physics_engine = None
-        self.player_list = None
-        self.wall_list = None
-        self.grass_list = None
-        self.explosions_list = None
-        self.player = None
-        self.player_position = None
-        self.map = None
 
-    def setup(self):
+        # Attributes related to physics
+        self.physics_engine = None
+
+        # Attributes related to map and path finding
         self.map = Map()
-        self.player_list = arcade.SpriteList()
-        self.explosions_list = arcade.SpriteList()
+        self.movements_grid = None
         self.movements_grid_textured = arcade.SpriteList()
         self.wall_list = self.map.get_sprite_list()
         self.grass_list = self.map.get_grass_sprite_list()
-        self.player = PlayerCharacter()
-        self.player_position = Position(22, 1)
-        position = self.map.get_center_of_position(self.player_position)
-        # self.player.center_x = (const.GAME_SCREEN_WIDTH // 2)
-        self.player.center_x = position[0]
-        self.player.center_y = position[1]
+
+        # Attributes related to characters
+        self.player_list = arcade.SpriteList()
+        self.npc_list = arcade.SpriteList()
+        self.player = Character(const.CHARACTER_PLAYER, Position(22, 1))
+        self.enemy = Character(const.CHARACTER_NPC, Position(10, 3))
+        self.enemy_path = None
+        self.explosions_list = arcade.SpriteList()
+
+    def setup(self):
 
         self.player_list.append(self.player)
+        self.npc_list.append(self.enemy)
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player, self.wall_list)
-        destiny = Position(28, 28)
-        self.movements_grid = PathFinder.find_path_only_two_directions(
+        destiny = self.player.get_position_in_grid()
+        self.enemy.steps = PathFinder.find_path_only_two_directions(
             self.map.grid,
             self.player.get_position_in_grid(),
             destiny
         )
-        PathFinder.texture_steps(self.movements_grid, self.movements_grid_textured)
 
     def on_draw(self):
         arcade.start_render()
@@ -58,6 +55,7 @@ class MyGame(arcade.Window):
         self.grass_list.draw()
         self.movements_grid_textured.draw()
         self.player_list.draw()
+        self.npc_list.draw()
         self.explosions_list.draw()
 
     def on_key_press(self, key, modifiers):
@@ -80,12 +78,13 @@ class MyGame(arcade.Window):
             self.explosions_list.append(explosion)
 
     def on_update(self, delta_time: float):
-        # self.player.go_to_destiny()
+        self.enemy.go_to_destiny()
         # print("ESTOY EN:")
         # print(self.get_position_in_grid(31,21))
         # print("X: " + str(self.player.center_x) + " Y:" + str(self.player.center_y))
         # self.player_list.update()
         self.player_list.update_animation()
+        self.npc_list.update_animation()
         self.explosions_list.update()
         # Try to solve the problem with diagonal collisions
         self.physics_engine.update()
