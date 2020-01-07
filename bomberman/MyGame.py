@@ -20,21 +20,21 @@ class MyGame(arcade.Window):
 
         # Attributes related to physics
         self.physics_engine = None
+        self.npc_physics_engine = None
 
         # Attributes related to map and path finding
         self.map = Map()
         self.movements_grid = None
-        self.movements_grid_textured = arcade.SpriteList()
         self.wall_list = self.map.get_sprite_list()
         self.grass_list = self.map.get_grass_sprite_list()
 
         # Attributes related to characters
         self.player_list = arcade.SpriteList()
         self.npc_list = arcade.SpriteList()
-        self.player = Character(const.CHARACTER_PLAYER, Position(22, 1))
+        self.player = Character(const.CHARACTER_PLAYER, Position(22, 3))
         self.enemy = Character(const.CHARACTER_NPC, Position(10, 3))
-        self.enemy_path = None
         self.explosions_list = arcade.SpriteList()
+        self.player_last_position = self.player.get_position_in_grid()
 
     def setup(self):
 
@@ -42,18 +42,22 @@ class MyGame(arcade.Window):
         self.npc_list.append(self.enemy)
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player, self.wall_list)
-        destiny = self.player.get_position_in_grid()
-        self.enemy.steps = PathFinder.find_path_only_two_directions(
+        self.npc_physics_engine = arcade.PhysicsEngineSimple(self.enemy, self.wall_list)
+        self.enemy_to_chase()
+
+    def enemy_to_chase(self):
+        # pathfinder need the map, the starting position and the destiny position
+        npc_steps = PathFinder.find_path_only_two_directions(
             self.map.grid,
-            self.player.get_position_in_grid(),
-            destiny
+            self.enemy.get_position_in_grid(),
+            self.player.get_position_in_grid()
         )
+        self.enemy.set_path(npc_steps)
 
     def on_draw(self):
         arcade.start_render()
         self.wall_list.draw()
         self.grass_list.draw()
-        self.movements_grid_textured.draw()
         self.player_list.draw()
         self.npc_list.draw()
         self.explosions_list.draw()
@@ -78,6 +82,7 @@ class MyGame(arcade.Window):
             self.explosions_list.append(explosion)
 
     def on_update(self, delta_time: float):
+        self.player_last_position = self.player.get_position_in_grid()
         self.enemy.go_to_destiny()
         # print("ESTOY EN:")
         # print(self.get_position_in_grid(31,21))
@@ -86,8 +91,11 @@ class MyGame(arcade.Window):
         self.player_list.update_animation()
         self.npc_list.update_animation()
         self.explosions_list.update()
-        # Try to solve the problem with diagonal collisions
         self.physics_engine.update()
+        self.npc_physics_engine.update()
+        if self.player_last_position != self.player.get_position_in_grid():
+            self.enemy_to_chase()
+
         # print("EL CHARACTER ESTA EN LA POSICION: ")
         # print(self.player.get_center())
 

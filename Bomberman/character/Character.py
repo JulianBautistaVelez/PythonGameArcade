@@ -72,11 +72,11 @@ class Character(arcade.Sprite):
 
         self.walk_textures = load_walking_textures(main_path, self.character_type)
 
-        print("Texturas de NPC" if self.character_type else "Texturas de PLAYER")
-        print(len(self.idle_texture_pair))
-        print(self.idle_texture_pair)
-        print(len(self.walk_textures))
-        print(self.walk_textures)
+        # print("Texturas de NPC" if self.character_type else "Texturas de PLAYER")
+        # print(len(self.idle_texture_pair))
+        # print(self.idle_texture_pair)
+        # print(len(self.walk_textures))
+        # print(self.walk_textures)
 
     def update_animation(self, delta_time: float = 1/60):
 
