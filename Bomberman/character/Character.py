@@ -60,7 +60,7 @@ class Character(arcade.Sprite):
         self.actual_step = None
 
         # state of the character
-        self.reached_go_to = True
+        self.reached_go_to = False
         self.moving = False
 
         # collision box

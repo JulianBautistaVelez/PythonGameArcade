@@ -15,9 +15,10 @@ def create_grid_with_cells(grid):
                 grid[row].append(const.MAP_TILE_CRATE)
             else:
                 grid[row].append(const.MAP_TILE_EMPTY)
+    grid[2][18] = const.MAP_TILE_EMPTY
     grid[2][6] = const.MAP_TILE_EMPTY
     grid[26][18] = const.MAP_TILE_EMPTY
-    # grid[26][6] = const.MAP_TILE_EMPTY
+    grid[26][6] = const.MAP_TILE_EMPTY
 
 
 def texture_maze(grid, wall_list):

@@ -7,6 +7,9 @@ from utils.Path import PathFinder
 from map.Map import Map
 import os
 
+# TODO lograr que el npc busque de nuevo path para seguir persiguiendo al jugador,
+#  actualmente no encuentra camino y recibe el grid del mapa sucio tambien
+
 
 class MyGame(arcade.Window):
     def __init__(self, width, height, title):
@@ -27,14 +30,14 @@ class MyGame(arcade.Window):
         self.movements_grid = None
         self.wall_list = self.map.get_sprite_list()
         self.grass_list = self.map.get_grass_sprite_list()
+        # self.steps_list = arcade.SpriteList()
 
         # Attributes related to characters
         self.player_list = arcade.SpriteList()
         self.npc_list = arcade.SpriteList()
-        self.player = Character(const.CHARACTER_PLAYER, Position(22, 3))
-        self.enemy = Character(const.CHARACTER_NPC, Position(10, 3))
+        self.player = Character(const.CHARACTER_PLAYER, Position(10, 25))
+        self.enemy = Character(const.CHARACTER_NPC, Position(2, 2))
         self.explosions_list = arcade.SpriteList()
-        self.player_last_position = self.player.get_position_in_grid()
 
     def setup(self):
 
@@ -53,6 +56,7 @@ class MyGame(arcade.Window):
             self.player.get_position_in_grid()
         )
         self.enemy.set_path(npc_steps)
+        # PathFinder.texture_steps(npc_steps, self.steps_list)
 
     def on_draw(self):
         arcade.start_render()
@@ -61,6 +65,7 @@ class MyGame(arcade.Window):
         self.player_list.draw()
         self.npc_list.draw()
         self.explosions_list.draw()
+        # self.steps_list.draw()
 
     def on_key_press(self, key, modifiers):
         if key == arcade.key.UP:
@@ -82,8 +87,10 @@ class MyGame(arcade.Window):
             self.explosions_list.append(explosion)
 
     def on_update(self, delta_time: float):
-        self.player_last_position = self.player.get_position_in_grid()
+        
         self.enemy.go_to_destiny()
+        ###################################################################
+
         # print("ESTOY EN:")
         # print(self.get_position_in_grid(31,21))
         # print("X: " + str(self.player.center_x) + " Y:" + str(self.player.center_y))
@@ -93,8 +100,12 @@ class MyGame(arcade.Window):
         self.explosions_list.update()
         self.physics_engine.update()
         self.npc_physics_engine.update()
-        if self.player_last_position != self.player.get_position_in_grid():
+
+        ####################################################################
+        if self.enemy.reached_go_to:
             self.enemy_to_chase()
+
+
 
         # print("EL CHARACTER ESTA EN LA POSICION: ")
         # print(self.player.get_center())

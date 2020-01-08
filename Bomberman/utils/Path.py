@@ -7,18 +7,19 @@ class PathFinder:
 
     @staticmethod
     def find_path_only_two_directions(grid, starting_pos: Position, end_pos: Position):
+        print("Path finding llamado: posicion origen %s y posicion destino %s" % (starting_pos, end_pos))
         steps = []
         current_pos = starting_pos
-        game_map = grid
+        game_map = grid[:]
         # print("TAMAÑO DEL GRID RECIBIDO POR PATHFINDER:")
         # print(len(grid))
         # print(len(grid[0]))
-        # print('\n'.join([''.join(['{:4}'.format(item) for item in row])
-        #                  for row in grid]))
+        print('\n'.join([''.join(['{:4}'.format(item) for item in row])
+                         for row in grid]))
         possible_steps = []
         distances = []
         # Append the actual position as first step
-        steps.append(starting_pos)
+        steps.append(current_pos)
         while current_pos != end_pos:
             if game_map[current_pos.pos_x + 1][current_pos.pos_y] == 0:
                 possible_steps.append(Position(current_pos.pos_x + 1, current_pos.pos_y))
@@ -37,13 +38,12 @@ class PathFinder:
                 else:
                     print("NO SE HA ENCONTRADO CAMINO HASTA EL DESTINO")
                     break
-
             else:
                 # print("Posible steps")
                 # print(len(possible_steps))
                 step_selected = possible_steps[distances.index(min(distances))]
-                grid[step_selected.pos_x][step_selected.pos_y] = 2
                 steps.append(step_selected)
+                game_map[step_selected.pos_x][step_selected.pos_y] = 2
                 current_pos = step_selected
                 # print("SIGUIENTE PASO")
                 # print(possible_steps[distances.index(min(distances))])
@@ -68,3 +68,11 @@ class PathFinder:
                     wall.center_x = row * const.MAP_SPRITE_SIZE + const.MAP_SPRITE_SIZE / 2
                     wall.center_y = column * const.MAP_SPRITE_SIZE + const.MAP_SPRITE_SIZE / 2
                     wall_list.append(wall)
+
+    @staticmethod
+    def texture_final_path(steps, steps_list: arcade.SpriteList):
+        for step in steps:
+            image = arcade.Sprite(":resources:images/tiles/grass_sprout.png", const.MAP_SPRITE_SCALING)
+            image.center_x = step.center_in_pix_y
+            image.center_y = step.center_in_pix_y
+            steps_list.append(image)
