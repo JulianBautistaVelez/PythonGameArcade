@@ -6,16 +6,16 @@ import arcade
 class PathFinder:
 
     @staticmethod
-    def find_path_only_two_directions(grid, starting_pos: Position, end_pos: Position):
+    def find_path_only_two_directions(starting_pos: Position, end_pos: Position, grid):
         print("Path finding llamado: posicion origen %s y posicion destino %s" % (starting_pos, end_pos))
         steps = []
         current_pos = starting_pos
-        game_map = grid[:]
+        game_map = grid.copy()
         # print("TAMAÑO DEL GRID RECIBIDO POR PATHFINDER:")
         # print(len(grid))
         # print(len(grid[0]))
-        print('\n'.join([''.join(['{:4}'.format(item) for item in row])
-                         for row in grid]))
+        # print('\n'.join([''.join(['{:4}'.format(item) for item in row])
+        #                  for row in grid]))
         possible_steps = []
         distances = []
         # Append the actual position as first step
@@ -57,6 +57,7 @@ class PathFinder:
         #                  for row in grid]))
         # for i in range(len(steps)):
         #     print(steps[i])
+        print("SI SE HA ENCONTRADO CAMINO HASTA EL DESTINO")
         return steps
 
     @staticmethod

@@ -8,7 +8,9 @@ from map.Map import Map
 import os
 
 # TODO lograr que el npc busque de nuevo path para seguir persiguiendo al jugador,
-#  actualmente no encuentra camino y recibe el grid del mapa sucio tambien
+#  actualmente no encuentra camino despues de alcanzar un par de veces la anterior posicion del jugador
+
+# TODO Crear una clase logger que imprima en consola e implementarla como decorator
 
 
 class MyGame(arcade.Window):
@@ -50,10 +52,13 @@ class MyGame(arcade.Window):
 
     def enemy_to_chase(self):
         # pathfinder need the map, the starting position and the destiny position
+        # print('\n'.join([''.join(['{:4}'.format(item) for item in row])
+        #                  for row in self.map.grid]))
+
         npc_steps = PathFinder.find_path_only_two_directions(
-            self.map.grid,
             self.enemy.get_position_in_grid(),
-            self.player.get_position_in_grid()
+            self.player.get_position_in_grid(),
+            self.map.grid
         )
         self.enemy.set_path(npc_steps)
         # PathFinder.texture_steps(npc_steps, self.steps_list)
@@ -87,7 +92,9 @@ class MyGame(arcade.Window):
             self.explosions_list.append(explosion)
 
     def on_update(self, delta_time: float):
-        
+        if self.enemy.reached_go_to:
+            self.enemy_to_chase()
+
         self.enemy.go_to_destiny()
         ###################################################################
 
@@ -102,8 +109,7 @@ class MyGame(arcade.Window):
         self.npc_physics_engine.update()
 
         ####################################################################
-        if self.enemy.reached_go_to:
-            self.enemy_to_chase()
+
 
 
 

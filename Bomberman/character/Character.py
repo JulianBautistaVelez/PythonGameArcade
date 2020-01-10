@@ -110,6 +110,8 @@ class Character(arcade.Sprite):
         return [self.center_x, self.center_y]
 
     def set_path(self, steps):
+        # for step in steps:
+        #     print(step)
         self.steps = steps
         self.actual_step = self.steps.pop(0)
 
@@ -124,7 +126,6 @@ class Character(arcade.Sprite):
 
         # if self.center_x == position.center_in_pix_x and self.center_y == position.center_in_pix_y:
         # if self.center_x != position.center_in_pix_x or self.center_y != position.center_in_pix_y:
-        self.reached_go_to = False
         if self.center_x < position.center_in_pix_x:
             self.change_x = const.CHARACTER_MOVEMENT_SPEED
             self.change_y = 0
@@ -145,15 +146,19 @@ class Character(arcade.Sprite):
         #     self.moving = False
 
     def go_to_destiny(self):
-        if len(self.steps) == 0:
+        # print("PASOS RESTANTES")
+        # print(len(self.steps))
+        if self.center_x == self.steps[len(self.steps) - 1].center_in_pix_x or \
+                self.center_y == self.steps[len(self.steps) - 1].center_in_pix_y:
+            print("CHARACTER REACHED GO_TO")
             self.reached_go_to = True
             self.change_x = 0
             self.change_y = 0
         elif self.center_x != self.steps[len(self.steps) - 1].center_in_pix_x or \
                 self.center_y != self.steps[len(self.steps) - 1].center_in_pix_y:
-            # print("comparacion X: " + str(self.center_x) + ", " + str(self.actual_step.center_in_pix_x))
-            # print("comparacion Y: " + str(self.center_y) + ", " + str(self.actual_step.center_in_pix_y))
+            self.reached_go_to = False
             if self.center_x == self.actual_step.center_in_pix_x and self.center_y == self.actual_step.center_in_pix_y:
+                # print(self.get_position_in_grid())
                 # print("SEGUNDA COMPROBACION PASADA")
                 self.actual_step = self.steps.pop(0)
                 self.go_to(self.actual_step)
