@@ -7,10 +7,12 @@ from utils.Path import PathFinder
 from map.Map import Map
 import os
 
-# TODO lograr que el npc busque de nuevo path para seguir persiguiendo al jugador,
-#  actualmente no encuentra camino despues de alcanzar un par de veces la anterior posicion del jugador
+# TODO revisar la condicion de llegada a destino del npc, actualmente considera que ha llegado aún cuando solo coincide
+#  una coordenada
 
 # TODO Crear una clase logger que imprima en consola e implementarla como decorator
+# TODO Crear una clase timer que calcule el tiempo de procesado de cada Frame y lo logee
+# TODO Mejorar el metodo de creación de los explosivos, tarda mucho en cargar las texturas de la primera instanciación
 
 
 class MyGame(arcade.Window):

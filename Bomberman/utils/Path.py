@@ -1,6 +1,7 @@
 from utils.Position import Position
 from GameConstants import GameConstants as const
 import arcade
+import copy
 
 
 class PathFinder:
@@ -9,8 +10,8 @@ class PathFinder:
     def find_path_only_two_directions(starting_pos: Position, end_pos: Position, grid):
         print("Path finding llamado: posicion origen %s y posicion destino %s" % (starting_pos, end_pos))
         steps = []
-        current_pos = starting_pos
-        game_map = grid.copy()
+        current_pos = copy.deepcopy(starting_pos)
+        game_map = copy.deepcopy(grid)
         # print("TAMAÑO DEL GRID RECIBIDO POR PATHFINDER:")
         # print(len(grid))
         # print(len(grid[0]))
@@ -57,7 +58,7 @@ class PathFinder:
         #                  for row in grid]))
         # for i in range(len(steps)):
         #     print(steps[i])
-        print("SI SE HA ENCONTRADO CAMINO HASTA EL DESTINO")
+        # print("SI SE HA ENCONTRADO CAMINO HASTA EL DESTINO")
         return steps
 
     @staticmethod

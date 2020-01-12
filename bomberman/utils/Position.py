@@ -20,6 +20,9 @@ class Position:
             return NotImplemented
         return self.pos_x == other.pos_x and self.pos_y == other.pos_y
 
+    def __copy__(self):
+        return Position(self.pos_x, self.pos_y)
+
     def distance_to(self, obj):
         return math.sqrt(math.pow((obj.pos_x - self.pos_x), 2) + math.pow((obj.pos_y - self.pos_y), 2))
     
