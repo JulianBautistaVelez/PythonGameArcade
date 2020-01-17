@@ -149,8 +149,8 @@ class Character(arcade.Sprite):
     def go_to_destiny(self):
         # print("PASOS RESTANTES")
         # print(len(self.steps))
-        if len(self.steps) == 0 or self.center_x == self.steps[len(self.steps) - 1].center_in_pix_x or \
-                self.center_y == self.steps[len(self.steps) - 1].center_in_pix_y:
+        if len(self.steps) == 0 or (self.center_x == self.steps[len(self.steps) - 1].center_in_pix_x and \
+                self.center_y == self.steps[len(self.steps) - 1].center_in_pix_y):
             print("CHARACTER REACHED GO_TO")
             self.reached_go_to = True
             self.change_x = 0

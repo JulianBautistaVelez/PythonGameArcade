@@ -4,6 +4,7 @@ from character.Character import Character
 from objects.explosives.Explosives import Explosives
 from utils.Position import Position
 from utils.Path import PathFinder
+from utils.MyDecorators import run_async
 from map.Map import Map
 import os
 
@@ -52,6 +53,7 @@ class MyGame(arcade.Window):
         self.npc_physics_engine = arcade.PhysicsEngineSimple(self.enemy, self.wall_list)
         self.enemy_to_chase()
 
+    @run_async
     def enemy_to_chase(self):
         # pathfinder need the map, the starting position and the destiny position
         # print('\n'.join([''.join(['{:4}'.format(item) for item in row])
