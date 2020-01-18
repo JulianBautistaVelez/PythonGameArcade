@@ -1,4 +1,5 @@
 import arcade
+import time
 from GameConstants import GameConstants as const
 from utils.Position import Position
 
@@ -58,10 +59,12 @@ class Character(arcade.Sprite):
         # steps to reach destiny
         self.steps = []
         self.actual_step = None
+        self.destiny = None
 
         # state of the character
         self.reached_go_to = False
         self.moving = False
+        self.explosives_time = time.time() - 5.0
 
         # collision box
         self.points = [[-10, -15], [10, -15], [-10, 8], [10, 8]]
@@ -116,17 +119,10 @@ class Character(arcade.Sprite):
         if not len(self.steps) == 0:
             self.actual_step = self.steps.pop(0)
 
-    def go_to(self, position: Position):
-        # print("ESTOY EN:")
-        # # print(self.get_position_in_grid(31,21))
-        # print("X: " + str(self.center_x) + " Y:" + str(self.center_y))
-        # print("QUIERO IR A:")
-        # print(position)
-        # print("HE LLEGADO?:")
-        # print(self.reached_go_to)
+    def set_destiny(self, destiny:Position):
+        self.destiny = destiny
 
-        # if self.center_x == position.center_in_pix_x and self.center_y == position.center_in_pix_y:
-        # if self.center_x != position.center_in_pix_x or self.center_y != position.center_in_pix_y:
+    def go_to(self, position: Position):
         if self.center_x < position.center_in_pix_x:
             self.change_x = const.CHARACTER_MOVEMENT_SPEED
             self.change_y = 0
@@ -139,30 +135,26 @@ class Character(arcade.Sprite):
         elif self.center_y > position.center_in_pix_y:
             self.change_y = -const.CHARACTER_MOVEMENT_SPEED
             self.change_x = 0
-        # else:
-        #     print("HE LLEGADO!!")
-        #     self.change_x = 0
-        #     self.change_y = 0
-        #     self.reached_go_to = True
-        #     self.moving = False
 
     def go_to_destiny(self):
-        # print("PASOS RESTANTES")
-        # print(len(self.steps))
-        if len(self.steps) == 0 or (self.center_x == self.steps[len(self.steps) - 1].center_in_pix_x and \
-                self.center_y == self.steps[len(self.steps) - 1].center_in_pix_y):
-            print("CHARACTER REACHED GO_TO")
+        if self.center_x == self.destiny.center_in_pix_x and self.center_y == self.destiny.center_in_pix_y:
+            # print("CHARACTER REACHED GO_TO")
             self.reached_go_to = True
             self.change_x = 0
             self.change_y = 0
-        elif self.center_x != self.steps[len(self.steps) - 1].center_in_pix_x or \
-                self.center_y != self.steps[len(self.steps) - 1].center_in_pix_y:
+        else:
             self.reached_go_to = False
             if self.center_x == self.actual_step.center_in_pix_x and self.center_y == self.actual_step.center_in_pix_y:
-                # print(self.get_position_in_grid())
-                # print("SEGUNDA COMPROBACION PASADA")
                 self.actual_step = self.steps.pop(0)
                 self.go_to(self.actual_step)
+
+    def are_explosives_in_cooldown(self):
+        if (time.time() - self.explosives_time) > 5.0:
+            self.explosives_time = time.time()
+            return False
+        else:
+            return True
+
 
 
 

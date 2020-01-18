@@ -8,12 +8,10 @@ from utils.MyDecorators import run_async
 from map.Map import Map
 import os
 
-# TODO revisar la condicion de llegada a destino del npc, actualmente considera que ha llegado aún cuando solo coincide
-#  una coordenada
-
-# TODO Crear una clase logger que imprima en consola e implementarla como decorator
-# TODO Crear una clase timer que calcule el tiempo de procesado de cada Frame y lo logee
-# TODO Mejorar el metodo de creación de los explosivos, tarda mucho en cargar las texturas de la primera instanciación
+# TODO aprender a prefabricar objetos, activarlos y desactivarlos para hacer mas eficiente el programa
+# TODO implementar el daño o la muerte de los personajes
+# TODO implementar que los explosivos maten lo que esta en su area de efecto
+# TODO añadir más mecanicas al juego (que el npc ataque, que cambie la velocidad, etc)
 
 
 class MyGame(arcade.Window):
@@ -55,17 +53,14 @@ class MyGame(arcade.Window):
 
     @run_async
     def enemy_to_chase(self):
-        # pathfinder need the map, the starting position and the destiny position
-        # print('\n'.join([''.join(['{:4}'.format(item) for item in row])
-        #                  for row in self.map.grid]))
-
         npc_steps = PathFinder.find_path_only_two_directions(
             self.enemy.get_position_in_grid(),
             self.player.get_position_in_grid(),
             self.map.grid
         )
-        self.enemy.set_path(npc_steps)
-        # PathFinder.texture_steps(npc_steps, self.steps_list)
+        if len(npc_steps) > 0:
+            self.enemy.set_path(npc_steps)
+            self.enemy.set_destiny(npc_steps[-1])
 
     def on_draw(self):
         arcade.start_render()
@@ -92,33 +87,21 @@ class MyGame(arcade.Window):
         elif key == arcade.key.LEFT or key == arcade.key.RIGHT:
             self.player.change_x = 0
         elif key == arcade.key.SPACE:
-            explosion = Explosives(self.player.center_x, self.player.center_y)
-            self.explosions_list.append(explosion)
+            if not self.player.are_explosives_in_cooldown():
+                explosion = Explosives(self.player.center_x, self.player.center_y)
+                self.explosions_list.append(explosion)
 
     def on_update(self, delta_time: float):
         if self.enemy.reached_go_to:
             self.enemy_to_chase()
-
         self.enemy.go_to_destiny()
         ###################################################################
-
-        # print("ESTOY EN:")
-        # print(self.get_position_in_grid(31,21))
-        # print("X: " + str(self.player.center_x) + " Y:" + str(self.player.center_y))
-        # self.player_list.update()
         self.player_list.update_animation()
         self.npc_list.update_animation()
         self.explosions_list.update()
         self.physics_engine.update()
         self.npc_physics_engine.update()
-
         ####################################################################
-
-
-
-
-        # print("EL CHARACTER ESTA EN LA POSICION: ")
-        # print(self.player.get_center())
 
         # --- Manage Scrolling ---
 
