@@ -8,7 +8,10 @@ from utils.MyDecorators import run_async
 from map.Map import Map
 import os
 
+# TODO's * = opcionales
+
 # TODO aprender a prefabricar objetos, activarlos y desactivarlos para hacer mas eficiente el programa
+# TODO *Crear una clase ENEMY o NPC que extieda de Character y simplificar Character
 # TODO implementar el daño o la muerte de los personajes
 # TODO implementar que los explosivos maten lo que esta en su area de efecto
 # TODO añadir más mecanicas al juego (que el npc ataque, que cambie la velocidad, etc)
