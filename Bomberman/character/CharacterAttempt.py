@@ -3,6 +3,7 @@ import time
 from GameConstants import GameConstants as const
 from utils.Position import Position
 
+TEXTURES = arcade.load_spritesheet("././resources/images/animated_characters/barbarian/running.png", 850, 400, 10, 50)
 
 def load_texture_pair(filename, character_type: int):
     if character_type == const.CHARACTER_PLAYER:
@@ -57,6 +58,7 @@ class Character(arcade.Sprite):
         self.center_y = position.center_in_pix_y
 
         self.current_texture = 0
+        self.textures = TEXTURES
 
         # type of character (player character or npc)
         self.character_type = character_type
@@ -105,8 +107,7 @@ class Character(arcade.Sprite):
         if self.current_texture > 8 * const.CHARACTER_UPDATES_PER_FRAME:
             self.current_texture = 0
 
-        self.texture = \
-            self.walk_textures[self.current_texture // const.CHARACTER_UPDATES_PER_FRAME][self.character_face_direction]
+        self.set_texture((10*self.character_face_direction) + self.current_texture)
 
     def get_position_in_grid(self):
         return Position(

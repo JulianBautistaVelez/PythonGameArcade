@@ -4,7 +4,7 @@ from character.Character import Character
 from objects.explosives.Explosives import Explosives
 from utils.Position import Position
 from utils.Path import PathFinder
-from utils.MyDecorators import run_async
+from utils.MyDecorators import run_async, log_timer
 from map.Map import Map
 import os
 
