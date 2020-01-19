@@ -1,6 +1,7 @@
 import arcade
 from GameConstants import GameConstants as const
 from character.Character import Character
+from character.CharacterAttempt import CharacterAttempt
 from objects.explosives.Explosives import Explosives
 from utils.Position import Position
 from utils.Path import PathFinder
@@ -10,6 +11,7 @@ import os
 
 # TODO's * = opcionales
 
+# TODO Arreglar los frames de la nueva clase character para que el movimiento sea mas fluido y renombrar la clase
 # TODO aprender a prefabricar objetos, activarlos y desactivarlos para hacer mas eficiente el programa
 # TODO *Crear una clase ENEMY o NPC que extieda de Character y simplificar Character
 # TODO implementar el daño o la muerte de los personajes
@@ -41,7 +43,7 @@ class MyGame(arcade.Window):
         # Attributes related to characters
         self.player_list = arcade.SpriteList()
         self.npc_list = arcade.SpriteList()
-        self.player = Character(const.CHARACTER_PLAYER, Position(10, 25))
+        self.player = CharacterAttempt(const.CHARACTER_PLAYER, Position(10, 25))
         self.enemy = Character(const.CHARACTER_NPC, Position(2, 2))
         self.explosions_list = arcade.SpriteList()
 

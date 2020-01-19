@@ -31,16 +31,16 @@ def load_walking_textures(filename, character_type: int):
     for i in range(const.CHARACTER_UPDATES_PER_FRAME):
         if character_type == const.CHARACTER_PLAYER:
             frame = [
-                arcade.load_texture(filename + f"_walk_{i}.png", scale=const.CHARACTER_SPRITE_SCALING, mirrored=True),
                 arcade.load_texture(filename + f"_walk_{i}.png", scale=const.CHARACTER_SPRITE_SCALING),
+                arcade.load_texture(filename + f"_walk_{i}.png", scale=const.CHARACTER_SPRITE_SCALING, mirrored=True),
                 arcade.load_texture(filename + f"_walk_up_{i}.png", scale=const.CHARACTER_SPRITE_SCALING),
                 arcade.load_texture(filename + f"_walk_down_{i}.png", scale=const.CHARACTER_SPRITE_SCALING)
             ]
             textures_list.append(frame)
         elif character_type == const.CHARACTER_NPC:
             frame = [
-                arcade.load_texture(filename + f"_walk_{i}.png", scale=const.CHARACTER_SPRITE_SCALING, mirrored=True),
                 arcade.load_texture(filename + f"_walk_{i}.png", scale=const.CHARACTER_SPRITE_SCALING),
+                arcade.load_texture(filename + f"_walk_{i}.png", scale=const.CHARACTER_SPRITE_SCALING, mirrored=True),
                 arcade.load_texture(filename + f"_walk_up_{i}.png", scale=const.CHARACTER_SPRITE_SCALING),
                 arcade.load_texture(filename + f"_walk_down_{i}.png", scale=const.CHARACTER_SPRITE_SCALING)
             ]
@@ -80,11 +80,11 @@ class Character(arcade.Sprite):
 
         self.walk_textures = load_walking_textures(main_path, self.character_type)
 
-        print("Texturas de NPC" if self.character_type else "Texturas de PLAYER")
-        print(len(self.idle_texture_pair))
-        print(self.idle_texture_pair)
-        print(len(self.walk_textures[0]))
-        print(self.walk_textures)
+        # print("Texturas de NPC" if self.character_type else "Texturas de PLAYER")
+        # print(len(self.idle_texture_pair))
+        # print(self.idle_texture_pair)
+        # print(len(self.walk_textures[0]))
+        # print(self.walk_textures)
 
     def update_animation(self, delta_time: float = 1/60):
 
