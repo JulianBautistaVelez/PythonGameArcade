@@ -15,9 +15,9 @@ class CharacterAttempt(arcade.Sprite):
         self.center_x = position.center_in_pix_x
         self.center_y = position.center_in_pix_y
 
-        self.current_texture = 9
+        self.current_texture = 0
         self.textures = arcade.load_spritesheet(
-            "./resources/images/animated_characters/barbarian/barbarian_sheet_scaled.png", 42, 40, 10, 44)
+            "./resources/images/animated_characters/barbarian/barbarian_sheet_scaled_2.png", 30, 30, 10, 44)
 
         # type of character (player character or npc)
         self.character_type = character_type
@@ -36,13 +36,6 @@ class CharacterAttempt(arcade.Sprite):
         self.points = [[-10, -15], [10, -15], [-10, 8], [10, 8]]
 
         main_path = "./resources/images/animated_characters/barbarian/barbarian"
-
-
-        # print("Texturas de NPC" if self.character_type else "Texturas de PLAYER")
-        # print(len(self.idle_texture_pair))
-        # print(self.idle_texture_pair)
-        # print(len(self.walk_textures[0]))
-        # print(self.walk_textures)
 
     def update_animation(self, delta_time: float = 1/60):
 
@@ -66,11 +59,11 @@ class CharacterAttempt(arcade.Sprite):
                 self.set_texture(43)
             return
 
-        self.current_texture -= 1
-        if self.current_texture < 0:
-            self.current_texture = 9
+        self.current_texture += 1
+        if self.current_texture > 27:
+            self.current_texture = 0
 
-        current_texture_number = (10*self.character_face_direction) + self.current_texture
+        current_texture_number = (10*self.character_face_direction) + (self.current_texture // 3)
         # print("triying to acces the sprite number {}".format(current_texture_number))
         self.set_texture(current_texture_number)
 

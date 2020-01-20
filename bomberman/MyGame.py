@@ -11,7 +11,7 @@ import os
 
 # TODO's * = opcionales
 
-# TODO Arreglar los frames de la nueva clase character para que el movimiento sea mas fluido y renombrar la clase
+# TODO Renombrar la clase CharacterAttempt
 # TODO aprender a prefabricar objetos, activarlos y desactivarlos para hacer mas eficiente el programa
 # TODO *Crear una clase ENEMY o NPC que extieda de Character y simplificar Character
 # TODO implementar el daño o la muerte de los personajes
@@ -64,8 +64,11 @@ class MyGame(arcade.Window):
             self.map.grid
         )
         if len(npc_steps) > 0:
-            self.enemy.set_path(npc_steps)
-            self.enemy.set_destiny(npc_steps[-1])
+            try:
+                self.enemy.set_path(npc_steps)
+                self.enemy.set_destiny(npc_steps[-1])
+            except IndexError:
+                print("No hay camino decidido para npc")
 
     def on_draw(self):
         arcade.start_render()
