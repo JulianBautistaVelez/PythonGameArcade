@@ -4,48 +4,7 @@ from GameConstants import GameConstants as const
 from utils.Position import Position
 
 
-def load_texture_pair(filename, character_type: int):
-    if character_type == const.CHARACTER_PLAYER:
-        return [
-            arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING),
-            arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING),
-            arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING),
-            arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING)
-        ]
-    elif character_type == const.CHARACTER_NPC:
-        return [
-            arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING),
-            arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING),
-            arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING),
-            arcade.load_texture(filename, scale=const.CHARACTER_SPRITE_SCALING)
-        ]
-
-
-def load_walking_textures(filename, character_type: int):
-    textures_list = []
-    #     arcade.load_spritesheet("././resources/images/animated_characters/barbarian/running.png", 850, 80, 10, 10),
-    #     arcade.load_spritesheet("././resources/images/animated_characters/barbarian/running.png", 850, 80, 10, 10),
-    #     arcade.load_spritesheet("././resources/images/animated_characters/barbarian/running_up.png", 850, 80, 10, 10),
-    #     arcade.load_spritesheet("././resources/images/animated_characters/barbarian/running_down.png", 850, 80, 10, 10)
-    # ]
-    for i in range(const.CHARACTER_UPDATES_PER_FRAME):
-        if character_type == const.CHARACTER_PLAYER:
-            frame = [
-                arcade.load_texture(filename + f"_walk_{i}.png", scale=const.CHARACTER_SPRITE_SCALING),
-                arcade.load_texture(filename + f"_walk_{i}.png", scale=const.CHARACTER_SPRITE_SCALING, mirrored=True),
-                arcade.load_texture(filename + f"_walk_up_{i}.png", scale=const.CHARACTER_SPRITE_SCALING),
-                arcade.load_texture(filename + f"_walk_down_{i}.png", scale=const.CHARACTER_SPRITE_SCALING)
-            ]
-            textures_list.append(frame)
-        elif character_type == const.CHARACTER_NPC:
-            frame = [
-                arcade.load_texture(filename + f"_walk_{i}.png", scale=const.CHARACTER_SPRITE_SCALING),
-                arcade.load_texture(filename + f"_walk_{i}.png", scale=const.CHARACTER_SPRITE_SCALING, mirrored=True),
-                arcade.load_texture(filename + f"_walk_up_{i}.png", scale=const.CHARACTER_SPRITE_SCALING),
-                arcade.load_texture(filename + f"_walk_down_{i}.png", scale=const.CHARACTER_SPRITE_SCALING)
-            ]
-            textures_list.append(frame)
-    return textures_list
+# print("La lista de texturas del nuevo personaje tiene {} elementos".format(len(TEXTURES)))
 
 
 class Character(arcade.Sprite):
@@ -57,6 +16,12 @@ class Character(arcade.Sprite):
         self.center_y = position.center_in_pix_y
 
         self.current_texture = 0
+        if character_type == const.CHARACTER_PLAYER:
+            self.textures = arcade.load_spritesheet(
+                "./resources/images/animated_characters/barbarian/barbarian_running_sheet.png", 85, 89, 14, 80)
+        else:
+            self.textures = arcade.load_spritesheet(
+                "./resources/images/animated_characters/automaton/automaton_walking_sheet.png", 104, 108, 12, 108)
 
         # type of character (player character or npc)
         self.character_type = character_type
@@ -76,16 +41,6 @@ class Character(arcade.Sprite):
 
         main_path = "./resources/images/animated_characters/barbarian/barbarian"
 
-        self.idle_texture_pair = load_texture_pair(f"{main_path}_idle.png", self.character_type)
-
-        self.walk_textures = load_walking_textures(main_path, self.character_type)
-
-        # print("Texturas de NPC" if self.character_type else "Texturas de PLAYER")
-        # print(len(self.idle_texture_pair))
-        # print(self.idle_texture_pair)
-        # print(len(self.walk_textures[0]))
-        # print(self.walk_textures)
-
     def update_animation(self, delta_time: float = 1/60):
 
         if self.change_x < 0 and self.character_face_direction != const.CHARACTER_LEFT_FACING:
@@ -98,15 +53,23 @@ class Character(arcade.Sprite):
             self.character_face_direction = const.CHARACTER_DOWN_FACING
 
         if self.change_x == 0 and self.change_y == 0:
-            self.texture = self.idle_texture_pair[self.character_face_direction]
+            if self.character_face_direction == const.CHARACTER_UP_FACING:
+                self.set_texture(40)
+            elif self.character_face_direction == const.CHARACTER_RIGHT_FACING:
+                self.set_texture(41)
+            elif self.character_face_direction == const.CHARACTER_DOWN_FACING:
+                self.set_texture(42)
+            else:
+                self.set_texture(43)
             return
 
         self.current_texture += 1
-        if self.current_texture > 8 * const.CHARACTER_UPDATES_PER_FRAME:
+        if self.current_texture > 39:
             self.current_texture = 0
 
-        self.texture = \
-            self.walk_textures[self.current_texture // const.CHARACTER_UPDATES_PER_FRAME][self.character_face_direction]
+        current_texture_number = (13*self.character_face_direction) + (self.current_texture // 3)
+        # print("triying to acces the sprite number {}".format(current_texture_number))
+        self.set_texture(current_texture_number)
 
     def get_position_in_grid(self):
         return Position(
@@ -117,41 +80,41 @@ class Character(arcade.Sprite):
     def get_center(self):
         return [self.center_x, self.center_y]
 
-    def set_path(self, steps):
-        # for step in steps:
-        #     print(step)
-        self.steps = steps
-        if not len(self.steps) == 0:
-            self.actual_step = self.steps.pop(0)
+    # def set_path(self, steps):
+    #     # for step in steps:
+    #     #     print(step)
+    #     self.steps = steps
+    #     if not len(self.steps) == 0:
+    #         self.actual_step = self.steps.pop(0)
 
-    def set_destiny(self, destiny:Position):
-        self.destiny = destiny
+    # def set_destiny(self, destiny:Position):
+    #     self.destiny = destiny
+    #
+    # def go_to(self, position: Position):
+    #     if self.center_x < position.center_in_pix_x:
+    #         self.change_x = const.CHARACTER_MOVEMENT_SPEED
+    #         self.change_y = 0
+    #     elif self.center_x > position.center_in_pix_x:
+    #         self.change_x = -const.CHARACTER_MOVEMENT_SPEED
+    #         self.change_y = 0
+    #     elif self.center_y < position.center_in_pix_y:
+    #         self.change_y = const.CHARACTER_MOVEMENT_SPEED
+    #         self.change_x = 0
+    #     elif self.center_y > position.center_in_pix_y:
+    #         self.change_y = -const.CHARACTER_MOVEMENT_SPEED
+    #         self.change_x = 0
 
-    def go_to(self, position: Position):
-        if self.center_x < position.center_in_pix_x:
-            self.change_x = const.CHARACTER_MOVEMENT_SPEED
-            self.change_y = 0
-        elif self.center_x > position.center_in_pix_x:
-            self.change_x = -const.CHARACTER_MOVEMENT_SPEED
-            self.change_y = 0
-        elif self.center_y < position.center_in_pix_y:
-            self.change_y = const.CHARACTER_MOVEMENT_SPEED
-            self.change_x = 0
-        elif self.center_y > position.center_in_pix_y:
-            self.change_y = -const.CHARACTER_MOVEMENT_SPEED
-            self.change_x = 0
-
-    def go_to_destiny(self):
-        if self.center_x == self.destiny.center_in_pix_x and self.center_y == self.destiny.center_in_pix_y:
-            # print("CHARACTER REACHED GO_TO")
-            self.reached_go_to = True
-            self.change_x = 0
-            self.change_y = 0
-        else:
-            self.reached_go_to = False
-            if self.center_x == self.actual_step.center_in_pix_x and self.center_y == self.actual_step.center_in_pix_y:
-                self.actual_step = self.steps.pop(0)
-                self.go_to(self.actual_step)
+    # def go_to_destiny(self):
+    #     if self.center_x == self.destiny.center_in_pix_x and self.center_y == self.destiny.center_in_pix_y:
+    #         # print("CHARACTER REACHED GO_TO")
+    #         self.reached_go_to = True
+    #         self.change_x = 0
+    #         self.change_y = 0
+    #     else:
+    #         self.reached_go_to = False
+    #         if self.center_x == self.actual_step.center_in_pix_x and self.center_y == self.actual_step.center_in_pix_y:
+    #             self.actual_step = self.steps.pop(0)
+    #             self.go_to(self.actual_step)
 
     def are_explosives_in_cooldown(self):
         if (time.time() - self.explosives_time) > 5.0:

@@ -1,7 +1,7 @@
 import arcade
 from GameConstants import GameConstants as const
 from character.Character import Character
-from character.CharacterAttempt import CharacterAttempt
+from character.NpcCharacter import NpcCharacter
 from objects.explosives.Explosives import Explosives
 from utils.Position import Position
 from utils.Path import PathFinder
@@ -10,6 +10,8 @@ from map.Map import Map
 import os
 
 # TODO's * = opcionales
+
+# TODO FALTA TERMINAR DE CALCULAR LOS INDICES DE LAS TEXTURAS EN LOS SPRITESHEET PARA CHARACTER Y NPCCHARACTER
 
 # TODO Renombrar la clase CharacterAttempt
 # TODO aprender a prefabricar objetos, activarlos y desactivarlos para hacer mas eficiente el programa
@@ -43,9 +45,11 @@ class MyGame(arcade.Window):
         # Attributes related to characters
         self.player_list = arcade.SpriteList()
         self.npc_list = arcade.SpriteList()
-        self.player = CharacterAttempt(const.CHARACTER_PLAYER, Position(10, 25))
-        self.enemy = Character(const.CHARACTER_NPC, Position(2, 2))
+        self.player = Character(const.CHARACTER_PLAYER, Position(10, 25))
+        self.enemy = NpcCharacter(const.CHARACTER_NPC, Position(2, 2))
         self.explosions_list = arcade.SpriteList()
+
+        self.npc_list.rescale(0.3)
 
     def setup(self):
 
