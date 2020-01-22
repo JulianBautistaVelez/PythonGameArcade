@@ -1,52 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ada21e11-98bb-46d9-8851-e4cc4d5f7cb8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/images/animated_characters/automaton/automaton_walking_sheet_scaled.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_running_sheet_scaled.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/map_objects/grass_texture.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/images/map_objects/grass_texture.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameConstants.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameConstants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/character/Character.py" beforeDir="false" afterPath="$PROJECT_DIR$/character/Character.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/automaton/automaton_sheet_scaled.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/automaton/automaton_walking_sheet.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_running_sheet.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_sheet_scaled_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyGame.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyGame.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/automaton/PC Computer - Arcanum - Automaton.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_idle.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_down_0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_down_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_down_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_down_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_down_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_down_5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_down_6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_down_7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_down_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_down_9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_up_0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_up_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_up_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_up_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_up_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_up_5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_up_6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_up_7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_up_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/animated_characters/barbarian/barbarian_walk_up_9.png" beforeDir="false" />
-    </list>
+    <list default="true" id="ada21e11-98bb-46d9-8851-e4cc4d5f7cb8" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
