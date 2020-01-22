@@ -27,7 +27,8 @@ class MyGame(arcade.Window):
         file_path = os.path.dirname(os.path.abspath(__file__))
         os.chdir(file_path)
         # Attributes related to game window
-        arcade.set_background_color(arcade.color.BLACK)
+        # arcade.set_background_color(arcade.color.BLACK)
+        self.background = None
         self.view_left = 0
         self.view_bottom = 0
 
@@ -39,7 +40,7 @@ class MyGame(arcade.Window):
         self.map = Map()
         self.movements_grid = None
         self.wall_list = self.map.get_sprite_list()
-        self.grass_list = self.map.get_grass_sprite_list()
+        # self.grass_list = self.map.get_grass_sprite_list()
         # self.steps_list = arcade.SpriteList()
 
         # Attributes related to characters
@@ -52,6 +53,8 @@ class MyGame(arcade.Window):
         self.npc_list.rescale(0.3)
 
     def setup(self):
+        self.background = arcade.load_texture("./resources/images/map_objects/grass_texture.png")
+        print(self.background)
 
         self.player_list.append(self.player)
         self.npc_list.append(self.enemy)
@@ -76,8 +79,10 @@ class MyGame(arcade.Window):
 
     def on_draw(self):
         arcade.start_render()
+        arcade.draw_texture_rectangle(const.MAP_BACKGROUND_SIZE // 2, const.MAP_BACKGROUND_SIZE // 2,
+                                      const.MAP_BACKGROUND_SIZE, const.MAP_BACKGROUND_SIZE, self.background)
         self.wall_list.draw()
-        self.grass_list.draw()
+        # self.grass_list.draw()
         self.player_list.draw()
         self.npc_list.draw()
         self.explosions_list.draw()

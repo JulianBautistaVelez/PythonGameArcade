@@ -9,19 +9,21 @@ from utils.Position import Position
 
 class Character(arcade.Sprite):
     def __init__(self, character_type: int, position: Position):
-        super().__init__()
+        super().__init__(center_x=position.center_in_pix_x, center_y=position.center_in_pix_y)
 
         self.character_face_direction = const.CHARACTER_RIGHT_FACING
-        self.center_x = position.center_in_pix_x
-        self.center_y = position.center_in_pix_y
 
         self.current_texture = 0
+        self.frames_animation = 0
+
         if character_type == const.CHARACTER_PLAYER:
             self.textures = arcade.load_spritesheet(
-                "./resources/images/animated_characters/barbarian/barbarian_running_sheet.png", 85, 89, 14, 80)
+                "./resources/images/animated_characters/barbarian/barbarian_running_sheet_scaled.png", 42, 45, 14, 80)
+            self.frames_animation = const.CHARACTER_FRAMES_ON_ANIMATION
         else:
             self.textures = arcade.load_spritesheet(
-                "./resources/images/animated_characters/automaton/automaton_walking_sheet.png", 104, 108, 12, 108)
+                "./resources/images/animated_characters/automaton/automaton_walking_sheet_scaled.png", 52, 54, 12, 108)
+            self.frames_animation = const.NPC_FRAMES_ON_ANIMATION
 
         # type of character (player character or npc)
         self.character_type = character_type
@@ -63,11 +65,14 @@ class Character(arcade.Sprite):
                 self.set_texture(43)
             return
 
+        # Slowing factor makes the game use the same sprite during 4 frames making the animation look smoother
+        slowing_factor = 4
         self.current_texture += 1
-        if self.current_texture > 39:
+        if self.current_texture > (self.frames_animation - 3) * slowing_factor:
             self.current_texture = 0
 
-        current_texture_number = (13*self.character_face_direction) + (self.current_texture // 3)
+        current_texture_number = (self.frames_animation*self.character_face_direction) + \
+                                 (self.current_texture // slowing_factor)
         # print("triying to acces the sprite number {}".format(current_texture_number))
         self.set_texture(current_texture_number)
 
@@ -79,42 +84,6 @@ class Character(arcade.Sprite):
 
     def get_center(self):
         return [self.center_x, self.center_y]
-
-    # def set_path(self, steps):
-    #     # for step in steps:
-    #     #     print(step)
-    #     self.steps = steps
-    #     if not len(self.steps) == 0:
-    #         self.actual_step = self.steps.pop(0)
-
-    # def set_destiny(self, destiny:Position):
-    #     self.destiny = destiny
-    #
-    # def go_to(self, position: Position):
-    #     if self.center_x < position.center_in_pix_x:
-    #         self.change_x = const.CHARACTER_MOVEMENT_SPEED
-    #         self.change_y = 0
-    #     elif self.center_x > position.center_in_pix_x:
-    #         self.change_x = -const.CHARACTER_MOVEMENT_SPEED
-    #         self.change_y = 0
-    #     elif self.center_y < position.center_in_pix_y:
-    #         self.change_y = const.CHARACTER_MOVEMENT_SPEED
-    #         self.change_x = 0
-    #     elif self.center_y > position.center_in_pix_y:
-    #         self.change_y = -const.CHARACTER_MOVEMENT_SPEED
-    #         self.change_x = 0
-
-    # def go_to_destiny(self):
-    #     if self.center_x == self.destiny.center_in_pix_x and self.center_y == self.destiny.center_in_pix_y:
-    #         # print("CHARACTER REACHED GO_TO")
-    #         self.reached_go_to = True
-    #         self.change_x = 0
-    #         self.change_y = 0
-    #     else:
-    #         self.reached_go_to = False
-    #         if self.center_x == self.actual_step.center_in_pix_x and self.center_y == self.actual_step.center_in_pix_y:
-    #             self.actual_step = self.steps.pop(0)
-    #             self.go_to(self.actual_step)
 
     def are_explosives_in_cooldown(self):
         if (time.time() - self.explosives_time) > 5.0:
