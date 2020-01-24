@@ -11,9 +11,6 @@ import os
 
 # TODO's * = opcionales
 
-# TODO FALTA TERMINAR DE CALCULAR LOS INDICES DE LAS TEXTURAS EN LOS SPRITESHEET PARA CHARACTER Y NPCCHARACTER
-
-# TODO Renombrar la clase CharacterAttempt
 # TODO aprender a prefabricar objetos, activarlos y desactivarlos para hacer mas eficiente el programa
 # TODO *Crear una clase ENEMY o NPC que extieda de Character y simplificar Character
 # TODO implementar el daño o la muerte de los personajes
@@ -49,8 +46,6 @@ class MyGame(arcade.Window):
         self.player = Character(const.CHARACTER_PLAYER, Position(10, 25))
         self.enemy = NpcCharacter(const.CHARACTER_NPC, Position(2, 2))
         self.explosions_list = arcade.SpriteList()
-
-        self.npc_list.rescale(0.3)
 
     def setup(self):
         self.background = arcade.load_texture("./resources/images/map_objects/grass_texture.png")
