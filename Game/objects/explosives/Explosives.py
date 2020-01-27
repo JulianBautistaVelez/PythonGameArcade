@@ -16,7 +16,7 @@ FIRST_TEXTURE = arcade.load_texture("././resources/images/items/mine.png", scale
 
 
 class Explosives(arcade.Sprite):
-    def __init__(self, pos_x, pos_y):
+    def __init__(self):
         super().__init__()
 
         self.detonation_time = const.CHARACTER_EXPLOSIVES_FUSE
@@ -40,6 +40,8 @@ class Explosives(arcade.Sprite):
                     self.set_texture(self.current_texture)
                 else:
                     self.alive = False
+                    self.current_texture = 0
+                    self.set_texture(self.current_texture)
                     # self.remove_from_sprite_lists()
 
     def draw(self):

@@ -86,7 +86,7 @@ class Character(arcade.Sprite):
         return [self.center_x, self.center_y]
 
     def are_explosives_in_cooldown(self):
-        if (time.time() - self.explosives_time) > 5.0:
+        if (time.time() - self.explosives_time) > const.CHARACTER_EXPLSIVES_COOLDOWN:
             self.explosives_time = time.time()
             return False
         else:

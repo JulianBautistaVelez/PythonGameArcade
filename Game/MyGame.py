@@ -3,6 +3,7 @@ from GameConstants import GameConstants as const
 from character.Character import Character
 from character.NpcCharacter import NpcCharacter
 from objects.explosives.Explosives import Explosives
+from objects.explosives.ExplosivesList import ExplosivesList
 from utils.Position import Position
 from utils.Path import PathFinder
 from utils.MyDecorators import run_async, log_timer
@@ -11,8 +12,7 @@ import os
 
 # TODO's * = opcionales
 
-# TODO aprender a prefabricar objetos, activarlos y desactivarlos para hacer mas eficiente el programa
-# TODO *Crear una clase ENEMY o NPC que extieda de Character y simplificar Character
+# TODO arreglar el problema de la textura cuando creo un explosivo mientras su instancia anterior explota
 # TODO implementar el daño o la muerte de los personajes
 # TODO implementar que los explosivos maten lo que esta en su area de efecto
 # TODO añadir más mecanicas al juego (que el npc ataque, que cambie la velocidad, etc)
@@ -45,7 +45,7 @@ class MyGame(arcade.Window):
         self.npc_list = arcade.SpriteList()
         self.player = Character(const.CHARACTER_PLAYER, Position(10, 25))
         self.enemy = NpcCharacter(const.CHARACTER_NPC, Position(2, 2))
-        self.explosions_list = arcade.SpriteList()
+        self.explosives_list = ExplosivesList()
 
     def setup(self):
         self.background = arcade.load_texture("./resources/images/map_objects/grass_texture.png")
@@ -80,7 +80,7 @@ class MyGame(arcade.Window):
         # self.grass_list.draw()
         self.player_list.draw()
         self.npc_list.draw()
-        self.explosions_list.draw()
+        self.explosives_list.draw()
         # self.steps_list.draw()
 
     def on_key_press(self, key, modifiers):
@@ -100,8 +100,7 @@ class MyGame(arcade.Window):
             self.player.change_x = 0
         elif key == arcade.key.SPACE:
             if not self.player.are_explosives_in_cooldown():
-                explosion = Explosives(self.player.center_x, self.player.center_y)
-                self.explosions_list.append(explosion)
+                self.explosives_list.plant_explosive(self.player.get_position_in_grid())
 
     def on_update(self, delta_time: float):
         if self.enemy.reached_go_to:
@@ -110,7 +109,7 @@ class MyGame(arcade.Window):
         ###################################################################
         self.player_list.update_animation()
         self.npc_list.update_animation()
-        self.explosions_list.update()
+        self.explosives_list.update()
         self.physics_engine.update()
         self.npc_physics_engine.update()
         ####################################################################
