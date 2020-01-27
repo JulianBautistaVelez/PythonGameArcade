@@ -3,7 +3,7 @@ import math
 import time
 
 from utils.Position import Position
-from objects.explosives.Explosives import Explosives
+from objects.explosives.Explosive import Explosive
 from GameConstants import GameConstants as const
 
 
@@ -14,9 +14,7 @@ class ExplosivesList(arcade.SpriteList):
         self.stock = math.ceil(const.CHARACTER_EXPLOSIVES_FUSE / const.CHARACTER_EXPLSIVES_COOLDOWN) + 1
         self.index = 0
         for _ in range(self.stock):
-            self.append(Explosives())
-
-        print("El tamaño de la lista de explosivos es {} ".format(self.stock))
+            self.append(Explosive())
 
     def update(self):
         for explosive in self.sprite_list:

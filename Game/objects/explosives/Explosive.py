@@ -15,7 +15,7 @@ TEXTURES = arcade.load_spritesheet(FILE_NAME, SPRITE_WIDTH, SPRITE_HEIGHT, COLUM
 FIRST_TEXTURE = arcade.load_texture("././resources/images/items/mine.png", scale=FIRST_SPRITE_SCALE)
 
 
-class Explosives(arcade.Sprite):
+class Explosive(arcade.Sprite):
     def __init__(self):
         super().__init__()
 

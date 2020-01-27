@@ -2,7 +2,7 @@ import arcade
 from GameConstants import GameConstants as const
 from character.Character import Character
 from character.NpcCharacter import NpcCharacter
-from objects.explosives.Explosives import Explosives
+from objects.explosives.Explosive import Explosive
 from objects.explosives.ExplosivesList import ExplosivesList
 from utils.Position import Position
 from utils.Path import PathFinder
