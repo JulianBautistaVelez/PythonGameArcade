@@ -1,6 +1,5 @@
-import arcade
 import time
-
+import arcade
 from utils.Position import Position
 from GameConstants import GameConstants as const
 
@@ -26,9 +25,11 @@ class Explosive(arcade.Sprite):
         self.set_texture(self.current_texture)
         self.start_time = None
         self.alive = False
+        self.custom_position = None
 
     def plant(self, position: Position):
         self.set_position(position.center_in_pix_x, position.center_in_pix_y-10)
+        self.custom_position = position
         self.start_time = time.time()
         self.alive = True
 
@@ -39,6 +40,7 @@ class Explosive(arcade.Sprite):
                 if self.current_texture < len(self.textures):
                     self.set_texture(self.current_texture)
                 else:
+                    self.explode()
                     self.alive = False
                     self.current_texture = 0
                     self.set_texture(self.current_texture)
@@ -50,3 +52,8 @@ class Explosive(arcade.Sprite):
 
     def is_alive(self):
         return self.alive
+
+    def explode(self):
+        print("Esta area debería morir")
+        for pos in self.custom_position.get_neighbours(1):
+            print(pos)

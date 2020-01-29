@@ -3,7 +3,7 @@ from GameConstants import GameConstants as const
 
 
 class Position:
-    def __init__(self, pos_x, pos_y):
+    def __init__(self, pos_x: int, pos_y: int):
         self.pos_x = pos_x
         self.pos_y = pos_y
         self.center_in_pix_x = int((self.pos_x * const.MAP_SPRITE_SIZE) + const.MAP_SPRITE_SIZE // 2)
@@ -25,4 +25,10 @@ class Position:
 
     def distance_to(self, obj):
         return math.sqrt(math.pow((obj.pos_x - self.pos_x), 2) + math.pow((obj.pos_y - self.pos_y), 2))
-    
+
+    def get_neighbours(self, area: int):
+        neighbours = []
+        for i in range(self.pos_x - area, self.pos_x + area + 1):
+            for j in range(self.pos_y - area, self.pos_y + area + 1):
+                neighbours.append(Position(i, j))
+        return neighbours

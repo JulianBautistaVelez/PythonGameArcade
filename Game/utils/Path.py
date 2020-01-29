@@ -1,7 +1,8 @@
-from utils.Position import Position
-from GameConstants import GameConstants as const
 import arcade
 import copy
+from utils.Position import Position
+from GameConstants import GameConstants as const
+
 
 
 class PathFinder:

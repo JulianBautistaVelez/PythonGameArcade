@@ -28,15 +28,11 @@ class Character(arcade.Sprite):
         # type of character (player character or npc)
         self.character_type = character_type
 
-        # steps to reach destiny
-        self.steps = []
-        self.actual_step = None
-        self.destiny = None
-
         # state of the character
         self.reached_go_to = False
         self.moving = False
         self.explosives_time = time.time() - 5.0
+        self.alive = True
 
         # collision box
         self.points = [[-10, -15], [10, -15], [-10, 8], [10, 8]]
@@ -92,6 +88,9 @@ class Character(arcade.Sprite):
         else:
             return True
 
+    def kill(self):
+        self.alive = False
+        self.remove_from_sprite_lists()
 
 
 

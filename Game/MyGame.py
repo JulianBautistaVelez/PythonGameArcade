@@ -1,18 +1,17 @@
+import os
 import arcade
 from GameConstants import GameConstants as const
 from character.Character import Character
 from character.NpcCharacter import NpcCharacter
-from objects.explosives.Explosive import Explosive
 from objects.explosives.ExplosivesList import ExplosivesList
 from utils.Position import Position
 from utils.Path import PathFinder
-from utils.MyDecorators import run_async, log_timer
+from utils.MyDecorators import run_async
 from map.Map import Map
-import os
+
 
 # TODO's * = opcionales
 
-# TODO arreglar el problema de la textura cuando creo un explosivo mientras su instancia anterior explota
 # TODO implementar el daño o la muerte de los personajes
 # TODO implementar que los explosivos maten lo que esta en su area de efecto
 # TODO añadir más mecanicas al juego (que el npc ataque, que cambie la velocidad, etc)
@@ -101,6 +100,8 @@ class MyGame(arcade.Window):
         elif key == arcade.key.SPACE:
             if not self.player.are_explosives_in_cooldown():
                 self.explosives_list.plant_explosive(self.player.get_position_in_grid())
+        elif key == arcade.key.P:
+            self.enemy.kill()
 
     def on_update(self, delta_time: float):
         if self.enemy.reached_go_to:

@@ -1,4 +1,3 @@
-import arcade
 from GameConstants import GameConstants as const
 from utils.Position import Position
 from character.Character import Character
