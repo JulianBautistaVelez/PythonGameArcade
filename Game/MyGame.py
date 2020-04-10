@@ -3,6 +3,7 @@ import arcade
 from GameConstants import GameConstants as const
 from character.Character import Character
 from character.NpcCharacter import NpcCharacter
+from objects.explosives.ExplosivesHandler import ExplosivesHandler
 from objects.explosives.ExplosivesList import ExplosivesList
 from utils.Position import Position
 from utils.Path import PathFinder
@@ -13,7 +14,6 @@ from map.Map import Map
 # TODO's * = opcionales
 
 # TODO implementar el daño o la muerte de los personajes
-# TODO implementar que los explosivos maten lo que esta en su area de efecto
 # TODO añadir más mecanicas al juego (que el npc ataque, que cambie la velocidad, etc)
 
 
@@ -45,6 +45,7 @@ class MyGame(arcade.Window):
         self.player = Character(const.CHARACTER_PLAYER, Position(10, 25))
         self.enemy = NpcCharacter(const.CHARACTER_NPC, Position(2, 2))
         self.explosives_list = ExplosivesList()
+        self.explosives_handler = None
 
     def setup(self):
         self.background = arcade.load_texture("./resources/images/map_objects/grass_texture.png")
@@ -52,6 +53,7 @@ class MyGame(arcade.Window):
 
         self.player_list.append(self.player)
         self.npc_list.append(self.enemy)
+        self.explosives_handler = ExplosivesHandler(self.player_list, self.npc_list, self.explosives_list)
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player, self.wall_list)
         self.npc_physics_engine = arcade.PhysicsEngineSimple(self.enemy, self.wall_list)
@@ -59,28 +61,27 @@ class MyGame(arcade.Window):
 
     @run_async
     def enemy_to_chase(self):
-        npc_steps = PathFinder.find_path_only_two_directions(
-            self.enemy.get_position_in_grid(),
-            self.player.get_position_in_grid(),
-            self.map.grid
-        )
-        if len(npc_steps) > 0:
-            try:
-                self.enemy.set_path(npc_steps)
-                self.enemy.set_destiny(npc_steps[-1])
-            except IndexError:
-                print("No hay camino decidido para npc")
+        if self.player.get_position_in_grid() != self.enemy.get_position_in_grid():
+            npc_steps = PathFinder.find_path_only_two_directions(
+                self.enemy.get_position_in_grid(),
+                self.player.get_position_in_grid(),
+                self.map.grid
+            )
+            if len(npc_steps) > 0:
+                try:
+                    self.enemy.set_path(npc_steps)
+                    self.enemy.set_destiny(npc_steps[-1])
+                except IndexError:
+                    print("No hay camino decidido para npc")
 
     def on_draw(self):
         arcade.start_render()
         arcade.draw_texture_rectangle(const.MAP_BACKGROUND_SIZE // 2, const.MAP_BACKGROUND_SIZE // 2,
                                       const.MAP_BACKGROUND_SIZE, const.MAP_BACKGROUND_SIZE, self.background)
         self.wall_list.draw()
-        # self.grass_list.draw()
         self.player_list.draw()
         self.npc_list.draw()
         self.explosives_list.draw()
-        # self.steps_list.draw()
 
     def on_key_press(self, key, modifiers):
         if key == arcade.key.UP:

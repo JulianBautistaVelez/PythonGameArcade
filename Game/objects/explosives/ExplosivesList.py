@@ -1,5 +1,6 @@
 import arcade
 import math
+
 from utils.Position import Position
 from objects.explosives.Explosive import Explosive
 from GameConstants import GameConstants as const

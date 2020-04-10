@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e86dc91-0bed-4b40-8d32-1e16a90e2db6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Game/objects/explosives/ExplosivesHandler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/utils/Event.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Game/utils/Observer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Game/GameConstants.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Game/GameConstants.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Game/MyGame.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Game/MyGame.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Game/character/Character.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Game/character/Character.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Game/character/NpcCharacter.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Game/character/NpcCharacter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Game/objects/explosives/Explosive.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Game/objects/explosives/Explosive.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Game/objects/explosives/ExplosivesList.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Game/objects/explosives/ExplosivesList.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Game/utils/Path.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Game/utils/Path.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Game/utils/Position.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Game/utils/Position.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -91,21 +91,29 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1580331893896">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1899" height="281" key="GridCell.Tab.0.bottom" timestamp="1586530425682">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580331893896" />
-    <state width="1515" height="210" key="GridCell.Tab.0.center" timestamp="1580331893896">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1899" height="281" key="GridCell.Tab.0.bottom/-1920.-5.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1586530425682" />
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580338326685" />
+    <state width="1899" height="281" key="GridCell.Tab.0.center" timestamp="1586530425681">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580331893896" />
-    <state width="1515" height="210" key="GridCell.Tab.0.left" timestamp="1580331893896">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1899" height="281" key="GridCell.Tab.0.center/-1920.-5.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1586530425681" />
+    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580338326685" />
+    <state width="1899" height="281" key="GridCell.Tab.0.left" timestamp="1586530425681">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580331893896" />
-    <state width="1515" height="210" key="GridCell.Tab.0.right" timestamp="1580331893896">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1899" height="281" key="GridCell.Tab.0.left/-1920.-5.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1586530425681" />
+    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580338326685" />
+    <state width="1899" height="281" key="GridCell.Tab.0.right" timestamp="1586530425681">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580331893896" />
+    <state width="1899" height="281" key="GridCell.Tab.0.right/-1920.-5.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1586530425681" />
+    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580338326685" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1586524172546">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1920.-5.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1586524172546" />
   </component>
 </project>

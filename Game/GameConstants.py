@@ -38,3 +38,5 @@ class GameConstants:
     MAP_BACKGROUND_SIZE = (MAP_SPRITE_SCALING * MAP_NATIVE_SPRITE_SIZE) * MAP_GRID_SIZE
 
 
+    ######################################## EXPLOSIVES CONSTANTS #############################
+    EXPLOSIVES_AOE = 1
