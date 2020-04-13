@@ -7,6 +7,7 @@ class Event:
         self.data = data
         if autofire:
             self.fire()
+
     def fire(self):
         for observer in Observer._observers:
             if self.name in observer._observables:

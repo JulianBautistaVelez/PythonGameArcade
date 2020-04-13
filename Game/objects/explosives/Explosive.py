@@ -56,6 +56,6 @@ class Explosive(arcade.Sprite):
 
     def explode(self):
         Event("Explosion", self)
-        print("Esta area debería morir")
+        # print("Esta area debería morir")
         # for pos in self.position_in_grid.get_neighbours(const.EXPLOSIVES_AOE):
         #     print(pos)

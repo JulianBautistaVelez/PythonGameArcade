@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e86dc91-0bed-4b40-8d32-1e16a90e2db6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Game/objects/explosives/ExplosivesHandler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Game/utils/Event.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Game/utils/Observer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Game/GameConstants.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Game/GameConstants.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Game/MyGame.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Game/MyGame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Game/character/Character.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Game/character/Character.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Game/character/NpcCharacter.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Game/character/NpcCharacter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Game/objects/explosives/Explosive.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Game/objects/explosives/Explosive.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Game/objects/explosives/ExplosivesList.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Game/objects/explosives/ExplosivesList.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Game/utils/Event.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Game/utils/Event.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Game/utils/Path.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Game/utils/Path.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

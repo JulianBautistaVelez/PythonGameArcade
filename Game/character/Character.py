@@ -4,9 +4,6 @@ from GameConstants import GameConstants as const
 from utils.Position import Position
 
 
-# print("La lista de texturas del nuevo personaje tiene {} elementos".format(len(TEXTURES)))
-
-
 class Character(arcade.Sprite):
     def __init__(self, character_type: int, position: Position):
         super().__init__(center_x=position.center_in_pix_x, center_y=position.center_in_pix_y)
@@ -37,8 +34,7 @@ class Character(arcade.Sprite):
         # collision box
         self.points = [[-10, -15], [10, -15], [-10, 8], [10, 8]]
 
-        main_path = "./resources/images/animated_characters/barbarian/barbarian"
-
+    #TODO parametrizar los sprites iniciales de cada direccion en los movimientos
     def update_animation(self, delta_time: float = 1/60):
 
         if self.change_x < 0 and self.character_face_direction != const.CHARACTER_LEFT_FACING:
@@ -61,7 +57,7 @@ class Character(arcade.Sprite):
                 self.set_texture(43)
             return
 
-        # Slowing factor makes the game use the same sprite during 4 frames making the animation look smoother
+        # Slowing factor makes the engine use the same sprite during 4 frames making the animation look smoother
         slowing_factor = 4
         self.current_texture += 1
         if self.current_texture > (self.frames_animation - 3) * slowing_factor:
@@ -69,7 +65,6 @@ class Character(arcade.Sprite):
 
         current_texture_number = (self.frames_animation*self.character_face_direction) + \
                                  (self.current_texture // slowing_factor)
-        # print("triying to acces the sprite number {}".format(current_texture_number))
         self.set_texture(current_texture_number)
 
     def get_position_in_grid(self):
@@ -77,9 +72,6 @@ class Character(arcade.Sprite):
             int(self.center_x // const.MAP_SPRITE_SIZE),
             int(self.center_y // const.MAP_SPRITE_SIZE)
         )
-
-    def get_center(self):
-        return [self.center_x, self.center_y]
 
     def are_explosives_in_cooldown(self):
         if (time.time() - self.explosives_time) > const.CHARACTER_EXPLSIVES_COOLDOWN:
@@ -91,27 +83,3 @@ class Character(arcade.Sprite):
     def kill(self):
         self.alive = False
         self.remove_from_sprite_lists()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

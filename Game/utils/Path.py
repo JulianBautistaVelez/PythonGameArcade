@@ -4,7 +4,6 @@ from utils.Position import Position
 from GameConstants import GameConstants as const
 
 
-
 class PathFinder:
 
     @staticmethod
@@ -13,11 +12,6 @@ class PathFinder:
         steps = []
         current_pos = copy.deepcopy(starting_pos)
         game_map = copy.deepcopy(grid)
-        # print("TAMAÑO DEL GRID RECIBIDO POR PATHFINDER:")
-        # print(len(grid))
-        # print(len(grid[0]))
-        # print('\n'.join([''.join(['{:4}'.format(item) for item in row])
-        #                  for row in grid]))
         possible_steps = []
         distances = []
         # Append the actual position as first step
@@ -41,25 +35,13 @@ class PathFinder:
                     print("NO SE HA ENCONTRADO CAMINO HASTA EL DESTINO")
                     break
             else:
-                # print("Posible steps")
-                # print(len(possible_steps))
                 step_selected = possible_steps[distances.index(min(distances))]
                 steps.append(step_selected)
                 game_map[step_selected.pos_x][step_selected.pos_y] = 2
                 current_pos = step_selected
-                # print("SIGUIENTE PASO")
-                # print(possible_steps[distances.index(min(distances))])
-                # print("ME FALTA:")
-                # print(min(distances))
                 possible_steps.clear()
                 distances.clear()
 
-        # print("MAPA SOLUCIONADO:")
-        # print('\n'.join([''.join(['{:4}'.format(item) for item in row])
-        #                  for row in grid]))
-        # for i in range(len(steps)):
-        #     print(steps[i])
-        # print("SI SE HA ENCONTRADO CAMINO HASTA EL DESTINO")
         return steps
 
     @staticmethod

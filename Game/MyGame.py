@@ -15,6 +15,7 @@ from map.Map import Map
 
 # TODO implementar el daño o la muerte de los personajes
 # TODO añadir más mecanicas al juego (que el npc ataque, que cambie la velocidad, etc)
+# TODO intentar crear mapas proceduralmente
 
 
 class MyGame(arcade.Window):

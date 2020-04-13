@@ -16,8 +16,6 @@ class NpcCharacter(Character):
         self.destiny = destiny
 
     def set_path(self, steps):
-        # for step in steps:
-        #     print(step)
         self.steps = steps
         if not len(self.steps) == 0:
             self.actual_step = self.steps.pop(0)
@@ -38,7 +36,6 @@ class NpcCharacter(Character):
 
     def go_to_destiny(self):
         if self.center_x == self.destiny.center_in_pix_x and self.center_y == self.destiny.center_in_pix_y:
-            # print("CHARACTER REACHED GO_TO")
             self.reached_go_to = True
             self.change_x = 0
             self.change_y = 0
