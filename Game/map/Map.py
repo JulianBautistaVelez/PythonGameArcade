@@ -10,15 +10,10 @@ def create_grid_with_cells(grid):
         for column in range(const.MAP_GRID_SIZE):
             if column % 2 == 1 and row % 2 == 1:
                 grid[row].append(const.MAP_TILE_CRATE)
-            elif column == 0 or row == 0 or column == const.MAP_GRID_SIZE - 1 or row == const.MAP_GRID_SIZE - 1\
-                    or column == 6 or column == 18:
+            elif column == 0 or row == 0 or column == const.MAP_GRID_SIZE - 1 or row == const.MAP_GRID_SIZE - 1:
                 grid[row].append(const.MAP_TILE_CRATE)
             else:
                 grid[row].append(const.MAP_TILE_EMPTY)
-    grid[2][18] = const.MAP_TILE_EMPTY
-    grid[2][6] = const.MAP_TILE_EMPTY
-    grid[26][18] = const.MAP_TILE_EMPTY
-    grid[26][6] = const.MAP_TILE_EMPTY
 
 
 def texture_maze(grid, wall_list):
@@ -29,8 +24,6 @@ def texture_maze(grid, wall_list):
                 wall_textures = [
                     arcade.Sprite("./resources/images/tiles/rock_wall0.png", const.MAP_SPRITE_SCALING),
                     arcade.Sprite("./resources/images/tiles/rock_wall1.png", const.MAP_SPRITE_SCALING)
-                    # arcade.Sprite("./resources/images/tiles/skull_wall2.png", const.MAP_WALL_SPRITE_SCALING),
-                    # arcade.Sprite("./resources/images/tiles/skull_wall3_R.png", 0.5),
                 ]
                 wall = wall_textures[random.randrange(0, 2)]
                 wall.center_x = row * const.MAP_SPRITE_SIZE + const.MAP_SPRITE_SIZE / 2
@@ -61,7 +54,6 @@ class Map:
         # To make sure there are odd number of vertical and horizontal cells
         self.size_x = const.MAP_GRID_SIZE
         self.size_y = const.MAP_GRID_SIZE
-        # print("tamaño mapa en x:" + str(self.size_x) + " tamaño mapa en y:" + str(self.size_y))
         self.grid = []
         self.wall_list = arcade.SpriteList()
         self.grass_list = arcade.SpriteList()

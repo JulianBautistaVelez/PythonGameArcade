@@ -8,7 +8,6 @@ class PathFinder:
 
     @staticmethod
     def find_path_only_two_directions(starting_pos: Position, end_pos: Position, grid):
-        print("Path finding llamado: posicion origen %s y posicion destino %s" % (starting_pos, end_pos))
         steps = []
         current_pos = copy.deepcopy(starting_pos)
         game_map = copy.deepcopy(grid)
@@ -32,7 +31,6 @@ class PathFinder:
                 if len(steps) > 0:
                     current_pos = steps.pop()
                 else:
-                    print("NO SE HA ENCONTRADO CAMINO HASTA EL DESTINO")
                     break
             else:
                 step_selected = possible_steps[distances.index(min(distances))]

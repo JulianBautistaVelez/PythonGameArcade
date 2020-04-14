@@ -5,25 +5,29 @@ from utils.Event import Event
 from utils.Position import Position
 from GameConstants import GameConstants as const
 
-SPRITE_WIDTH = 256
-SPRITE_HEIGHT = 256
-COLUMNS = 16
-COUNT = 60
-FIRST_SPRITE_SCALE = 0.3
-FILE_NAME = "././resources/images/spritesheets/explosion.png"
-# Preload of the textures
-TEXTURES = arcade.load_spritesheet(FILE_NAME, SPRITE_WIDTH, SPRITE_HEIGHT, COLUMNS, COUNT)
-FIRST_TEXTURE = arcade.load_texture("././resources/images/items/mine.png", scale=FIRST_SPRITE_SCALE)
-
 
 class Explosive(arcade.Sprite):
     def __init__(self):
         super().__init__()
+        # Preload of the textures
+        self.textures = arcade.load_spritesheet(
+            "././resources/images/spritesheets/explosion.png",
+            const.EXPLOSIVES_SPRITE_WIDTH,
+            const.EXPLOSIVES_SPRITE_HEIGHT,
+            const.EXPLOSIVES_COLUMNS,
+            const.EXPLOSIVES_COUNT)
+
+        self.textures.insert(
+            0,
+            arcade.load_texture(
+                 "././resources/images/items/mine.png",
+                 scale=const.EXPLOSIVES_FIRST_SPRITE_SCALE
+            )
+        )
 
         self.detonation_time = const.CHARACTER_EXPLOSIVES_FUSE
         self.current_texture = 0
-        self.textures = TEXTURES
-        self.textures.insert(0, FIRST_TEXTURE)
+
         self.set_texture(self.current_texture)
         self.start_time = None
         self.alive = False
@@ -56,6 +60,3 @@ class Explosive(arcade.Sprite):
 
     def explode(self):
         Event("Explosion", self)
-        # print("Esta area debería morir")
-        # for pos in self.position_in_grid.get_neighbours(const.EXPLOSIVES_AOE):
-        #     print(pos)

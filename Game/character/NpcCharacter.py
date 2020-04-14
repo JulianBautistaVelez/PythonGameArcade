@@ -22,16 +22,16 @@ class NpcCharacter(Character):
 
     def go_to(self, position: Position):
         if self.center_x < position.center_in_pix_x:
-            self.change_x = const.CHARACTER_MOVEMENT_SPEED
+            self.change_x = const.CHARACTER_NPC_MOVEMENT_SPEED
             self.change_y = 0
         elif self.center_x > position.center_in_pix_x:
-            self.change_x = -const.CHARACTER_MOVEMENT_SPEED
+            self.change_x = -const.CHARACTER_NPC_MOVEMENT_SPEED
             self.change_y = 0
         elif self.center_y < position.center_in_pix_y:
-            self.change_y = const.CHARACTER_MOVEMENT_SPEED
+            self.change_y = const.CHARACTER_NPC_MOVEMENT_SPEED
             self.change_x = 0
         elif self.center_y > position.center_in_pix_y:
-            self.change_y = -const.CHARACTER_MOVEMENT_SPEED
+            self.change_y = -const.CHARACTER_NPC_MOVEMENT_SPEED
             self.change_x = 0
 
     def go_to_destiny(self):

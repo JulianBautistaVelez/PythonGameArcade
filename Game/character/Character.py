@@ -74,11 +74,27 @@ class Character(arcade.Sprite):
         )
 
     def are_explosives_in_cooldown(self):
-        if (time.time() - self.explosives_time) > const.CHARACTER_EXPLSIVES_COOLDOWN:
+        if (time.time() - self.explosives_time) > const.CHARACTER_EXPLOSIVES_COOLDOWN:
             self.explosives_time = time.time()
             return False
         else:
             return True
+
+    def on_key_press(self, key, modifiers):
+        if key == arcade.key.UP:
+            self.change_y = const.CHARACTER_PLAYER_MOVEMENT_SPEED
+        elif key == arcade.key.DOWN:
+            self.change_y = -const.CHARACTER_PLAYER_MOVEMENT_SPEED
+        elif key == arcade.key.LEFT:
+            self.change_x = -const.CHARACTER_PLAYER_MOVEMENT_SPEED
+        elif key == arcade.key.RIGHT:
+            self.change_x = const.CHARACTER_PLAYER_MOVEMENT_SPEED
+
+    def on_key_release(self, key, modifiers):
+        if key == arcade.key.UP or key == arcade.key.DOWN:
+            self.change_y = 0
+        elif key == arcade.key.LEFT or key == arcade.key.RIGHT:
+            self.change_x = 0
 
     def kill(self):
         self.alive = False

@@ -10,7 +10,7 @@ class ExplosivesList(arcade.SpriteList):
     def __init__(self):
         super().__init__()
 
-        self.stock = math.ceil(const.CHARACTER_EXPLOSIVES_FUSE / const.CHARACTER_EXPLSIVES_COOLDOWN) + 1
+        self.stock = math.ceil(const.CHARACTER_EXPLOSIVES_FUSE / const.CHARACTER_EXPLOSIVES_COOLDOWN) + 1
         self.index = 0
         for _ in range(self.stock):
             self.append(Explosive())

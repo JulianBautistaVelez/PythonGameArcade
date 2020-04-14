@@ -10,17 +10,13 @@ from utils.Path import PathFinder
 from utils.MyDecorators import run_async
 from map.Map import Map
 
-
-# TODO's * = opcionales
-
-# TODO implementar el daño o la muerte de los personajes
 # TODO añadir más mecanicas al juego (que el npc ataque, que cambie la velocidad, etc)
 # TODO intentar crear mapas proceduralmente
+# TODO separar las diferentes ventanas en diferentes archivos
 
-
-class MyGame(arcade.Window):
-    def __init__(self, width, height, title):
-        super().__init__(width, height, title)
+class MyGame(arcade.View):
+    def __init__(self):
+        super().__init__()
         file_path = os.path.dirname(os.path.abspath(__file__))
         os.chdir(file_path)
         # Attributes related to game window
@@ -37,8 +33,6 @@ class MyGame(arcade.Window):
         self.map = Map()
         self.movements_grid = None
         self.wall_list = self.map.get_sprite_list()
-        # self.grass_list = self.map.get_grass_sprite_list()
-        # self.steps_list = arcade.SpriteList()
 
         # Attributes related to characters
         self.player_list = arcade.SpriteList()
@@ -85,27 +79,32 @@ class MyGame(arcade.Window):
         self.explosives_list.draw()
 
     def on_key_press(self, key, modifiers):
-        if key == arcade.key.UP:
-            self.player.change_y = const.CHARACTER_MOVEMENT_SPEED
-        elif key == arcade.key.DOWN:
-            self.player.change_y = -const.CHARACTER_MOVEMENT_SPEED
-        elif key == arcade.key.LEFT:
-            self.player.change_x = -const.CHARACTER_MOVEMENT_SPEED
-        elif key == arcade.key.RIGHT:
-            self.player.change_x = const.CHARACTER_MOVEMENT_SPEED
+        self.player.on_key_press(key, modifiers)
 
     def on_key_release(self, key, modifiers):
-        if key == arcade.key.UP or key == arcade.key.DOWN:
-            self.player.change_y = 0
-        elif key == arcade.key.LEFT or key == arcade.key.RIGHT:
-            self.player.change_x = 0
-        elif key == arcade.key.SPACE:
+        # TODO decidir si la lista de explosivos se puede hacer un atributo del personaje
+        if key == arcade.key.SPACE:
             if not self.player.are_explosives_in_cooldown():
                 self.explosives_list.plant_explosive(self.player.get_position_in_grid())
-        elif key == arcade.key.P:
-            self.enemy.kill()
+        else:
+            self.player.on_key_release(key, modifiers)
 
     def on_update(self, delta_time: float):
+        game_over = False
+
+        if len(self.player_list) == 0 \
+                or self.enemy.get_position_in_grid() == self.player.get_position_in_grid():
+            message = "You lose :)"
+            game_over = True
+        elif len(self.npc_list) == 0:
+            message = "You win :("
+            game_over = True
+
+        if game_over:
+            game_over_view = GameOverView(message)
+            self.window.set_mouse_visible(True)
+            self.window.show_view(game_over_view)
+
         if self.enemy.reached_go_to:
             self.enemy_to_chase()
         self.enemy.go_to_destiny()
@@ -162,9 +161,32 @@ class MyGame(arcade.Window):
                                 const.GAME_SCREEN_HEIGHT + self.view_bottom - 1)
 
 
+class GameOverView(arcade.View):
+    def __init__(self, message):
+        super().__init__()
+        self.message = message
+
+    def on_show(self):
+        arcade.set_background_color(arcade.color.BLACK)
+
+    def on_draw(self):
+        arcade.start_render()
+
+        arcade.draw_text(self.message, const.GAME_SCREEN_WIDTH / 3, 650, arcade.color.WHITE, 30)
+        arcade.draw_text("Game Over", const.GAME_SCREEN_WIDTH/3, 550, arcade.color.WHITE, 54)
+        arcade.draw_text("Click to restart", const.GAME_SCREEN_WIDTH/3, 500, arcade.color.WHITE, 24)
+
+    def on_mouse_press(self, _x, _y, _button, _modifiers):
+        game = MyGame()
+        game.setup()
+        self.window.show_view(game)
+
+
 def main():
-    game = MyGame(const.GAME_SCREEN_WIDTH, const.GAME_SCREEN_HEIGHT, const.GAME_SCREEN_TITLE)
+    window = arcade.Window(const.GAME_SCREEN_WIDTH, const.GAME_SCREEN_HEIGHT, const.GAME_SCREEN_TITLE)
+    game = MyGame()
     game.setup()
+    window.show_view(game)
     arcade.run()
 
 
