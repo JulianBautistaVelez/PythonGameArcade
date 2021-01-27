@@ -27,7 +27,8 @@ class MyGame(arcade.View):
 
         # Attributes related to physics
         self.physics_engine = None
-        self.npc_physics_engine = None
+        self.npc_list_physics_engine = {}
+        #self.npc_physics_engine = None
 
         # Attributes related to map and path finding
         self.map = Map()
@@ -38,7 +39,8 @@ class MyGame(arcade.View):
         self.player_list = arcade.SpriteList()
         self.npc_list = arcade.SpriteList()
         self.player = Character(const.CHARACTER_PLAYER, Position(10, 25))
-        self.enemy = NpcCharacter(const.CHARACTER_NPC, Position(2, 2))
+        self.enemy1 = NpcCharacter(const.CHARACTER_NPC, Position(2, 2))
+        self.enemy2 = NpcCharacter(const.CHARACTER_NPC, Position(20, 2))
         self.explosives_list = ExplosivesList()
         self.explosives_handler = None
 
@@ -47,25 +49,27 @@ class MyGame(arcade.View):
         print(self.background)
 
         self.player_list.append(self.player)
-        self.npc_list.append(self.enemy)
+        self.npc_list.append(self.enemy1)
+        self.npc_list.append(self.enemy2)
         self.explosives_handler = ExplosivesHandler(self.player_list, self.npc_list, self.explosives_list)
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player, self.wall_list)
-        self.npc_physics_engine = arcade.PhysicsEngineSimple(self.enemy, self.wall_list)
+        for npc in self.npc_list:
+            self.npc_list_physics_engine[npc.id] = arcade.PhysicsEngineSimple(npc, self.wall_list)
         self.enemy_to_chase()
 
     @run_async
-    def enemy_to_chase(self):
-        if self.player.get_position_in_grid() != self.enemy.get_position_in_grid():
+    def enemy_to_chase(self, npc: NpcCharacter):
+        if self.player.get_position_in_grid() != npc.get_position_in_grid():
             npc_steps = PathFinder.find_path_only_two_directions(
-                self.enemy.get_position_in_grid(),
+                npc.get_position_in_grid(),
                 self.player.get_position_in_grid(),
                 self.map.grid
             )
             if len(npc_steps) > 0:
                 try:
-                    self.enemy.set_path(npc_steps)
-                    self.enemy.set_destiny(npc_steps[-1])
+                    npc.set_path(npc_steps)
+                    npc.set_destiny(npc_steps[-1])
                 except IndexError:
                     print("No hay camino decidido para npc")
 
@@ -93,7 +97,7 @@ class MyGame(arcade.View):
         game_over = False
 
         if len(self.player_list) == 0 \
-                or self.enemy.get_position_in_grid() == self.player.get_position_in_grid():
+                or self.reached_by_enemy():
             message = "You lose :)"
             game_over = True
         elif len(self.npc_list) == 0:
@@ -105,15 +109,18 @@ class MyGame(arcade.View):
             self.window.set_mouse_visible(True)
             self.window.show_view(game_over_view)
 
-        if self.enemy.reached_go_to:
-            self.enemy_to_chase()
-        self.enemy.go_to_destiny()
+        for npc in self.npc_list:
+            if npc.reached_go_to:
+                self.enemy_to_chase(npc)
+            npc.go_to_destiny()
         ###################################################################
         self.player_list.update_animation()
         self.npc_list.update_animation()
         self.explosives_list.update()
         self.physics_engine.update()
-        self.npc_physics_engine.update()
+        for npc_engine in self.npc_list_physics_engine:
+            npc_engine.update()
+
         ####################################################################
 
         # --- Manage Scrolling ---
@@ -159,6 +166,12 @@ class MyGame(arcade.View):
                                 const.GAME_SCREEN_WIDTH + self.view_left - 1,
                                 self.view_bottom,
                                 const.GAME_SCREEN_HEIGHT + self.view_bottom - 1)
+
+    def reached_by_enemy(self):
+        for npc in self.npc_list:
+            if npc.get_position_in_grid() == self.player.get_position_in_grid():
+                return True
+        return False
 
 
 class GameOverView(arcade.View):

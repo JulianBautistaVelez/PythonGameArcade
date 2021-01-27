@@ -8,6 +8,8 @@ class Character(arcade.Sprite):
     def __init__(self, character_type: int, position: Position):
         super().__init__(center_x=position.center_in_pix_x, center_y=position.center_in_pix_y)
 
+        self.id = id(self)
+
         self.character_face_direction = const.CHARACTER_RIGHT_FACING
 
         self.current_texture = 0
