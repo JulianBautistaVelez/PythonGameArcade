@@ -20,19 +20,16 @@ class MyGame(arcade.View):
         file_path = os.path.dirname(os.path.abspath(__file__))
         os.chdir(file_path)
         # Attributes related to game window
-        # arcade.set_background_color(arcade.color.BLACK)
-        self.background = None
+        self.background = arcade.load_texture("./resources/images/map_objects/grass_texture.png")
         self.view_left = 0
         self.view_bottom = 0
 
         # Attributes related to physics
         self.physics_engine = None
         self.npc_list_physics_engine = {}
-        #self.npc_physics_engine = None
 
         # Attributes related to map and path finding
         self.map = Map()
-        self.movements_grid = None
         self.wall_list = self.map.get_sprite_list()
 
         # Attributes related to characters
@@ -42,21 +39,19 @@ class MyGame(arcade.View):
         self.enemy1 = NpcCharacter(const.CHARACTER_NPC, Position(2, 2))
         self.enemy2 = NpcCharacter(const.CHARACTER_NPC, Position(20, 2))
         self.explosives_list = ExplosivesList()
-        self.explosives_handler = None
+        self.explosives_handler = ExplosivesHandler(self.player_list, self.npc_list, self.explosives_list)
 
     def setup(self):
-        self.background = arcade.load_texture("./resources/images/map_objects/grass_texture.png")
         print(self.background)
 
         self.player_list.append(self.player)
         self.npc_list.append(self.enemy1)
         self.npc_list.append(self.enemy2)
-        self.explosives_handler = ExplosivesHandler(self.player_list, self.npc_list, self.explosives_list)
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player, self.wall_list)
         for npc in self.npc_list:
             self.npc_list_physics_engine[npc.id] = arcade.PhysicsEngineSimple(npc, self.wall_list)
-        self.enemy_to_chase()
+            self.enemy_to_chase(npc)
 
     @run_async
     def enemy_to_chase(self, npc: NpcCharacter):
@@ -118,7 +113,7 @@ class MyGame(arcade.View):
         self.npc_list.update_animation()
         self.explosives_list.update()
         self.physics_engine.update()
-        for npc_engine in self.npc_list_physics_engine:
+        for npc_engine in self.npc_list_physics_engine.values():
             npc_engine.update()
 
         ####################################################################
