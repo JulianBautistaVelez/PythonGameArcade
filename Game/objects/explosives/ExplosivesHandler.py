@@ -8,7 +8,7 @@ from GameConstants import GameConstants as const
 
 class ExplosivesHandler(Observer):
 
-    def __init__(self, player_list: arcade.SpriteList, npc_list: arcade.SpriteList, explosives_list: ExplosivesList):
+    def __init__(self, player_list: arcade.SpriteList, npc_list: arcade.SpriteList):
         Observer.__init__(self)
         self.player_list = player_list
         self.npc_list = npc_list

@@ -43,10 +43,10 @@ class Explosive(arcade.Sprite):
         if self.alive:
             if time.time() - self.start_time > self.detonation_time:
                 self.current_texture += 1
+                self.explode()
                 if self.current_texture < len(self.textures):
                     self.set_texture(self.current_texture)
                 else:
-                    self.explode()
                     self.alive = False
                     self.current_texture = 0
                     self.set_texture(self.current_texture)

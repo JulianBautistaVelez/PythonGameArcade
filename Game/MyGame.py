@@ -24,10 +24,6 @@ class MyGame(arcade.View):
         self.view_left = 0
         self.view_bottom = 0
 
-        # Attributes related to physics
-        self.physics_engine = None
-        self.npc_list_physics_engine = {}
-
         # Attributes related to map and path finding
         self.map = Map()
         self.wall_list = self.map.get_sprite_list()
@@ -39,7 +35,11 @@ class MyGame(arcade.View):
         self.enemy1 = NpcCharacter(const.CHARACTER_NPC, Position(2, 2))
         self.enemy2 = NpcCharacter(const.CHARACTER_NPC, Position(20, 2))
         self.explosives_list = ExplosivesList()
-        self.explosives_handler = ExplosivesHandler(self.player_list, self.npc_list, self.explosives_list)
+        self.explosives_handler = ExplosivesHandler(self.player_list, self.npc_list)
+
+        # Attributes related to physics
+        self.physics_engine = arcade.PhysicsEngineSimple(self.player, self.wall_list)
+        self.npc_list_physics_engine = {}
 
     def setup(self):
         print(self.background)
@@ -48,7 +48,6 @@ class MyGame(arcade.View):
         self.npc_list.append(self.enemy1)
         self.npc_list.append(self.enemy2)
 
-        self.physics_engine = arcade.PhysicsEngineSimple(self.player, self.wall_list)
         for npc in self.npc_list:
             self.npc_list_physics_engine[npc.id] = arcade.PhysicsEngineSimple(npc, self.wall_list)
             self.enemy_to_chase(npc)
